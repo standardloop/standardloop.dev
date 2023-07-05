@@ -28,67 +28,55 @@ module.exports = {
       keyframes: {
         blob: {
           "0%": {
-            transform: "translate(0px, 0px) scale(1.0)",
+            transform: "translate(96px, 0px) scale(1.0)",  // (1,0)
           },
-          "5%": {
-            transform: "translate(-4px, -4px) scale(1.0)",
+          "6.25%": {
+            transform: "translate(83px, 48px) scale(1.05)",  // (root(3)/2, -1/2) // 0.86602540378
           },
-          "10%": {
-            transform: "translate(-8px, -8px) scale(1.0)",
+          "12.5%": {
+            transform: "translate(68px, 68px) scale(1.1)",  // (root(2)/2, -root(2)/2) // 0.70710678118
           },
-          "15%": {
-            transform: "translate(-16px, -16px) scale(1.0)",
-          },
-          "20%": {
-            transform: "translate(-20px, -20px) scale(1.0)",
+          "18.75%": {
+            transform: "translate(48px, 83px) scale(1.05)",  // (1/2, -root(3)/2)
           },
           "25%": {
-            transform: "translate(-24px, -24px) scale(1.0)",
+            transform: "translate(0px, 96px) scale(1.0)",  // (0, -1)
           },
-          "30%": {
-            transform: "translate(0px, -0px) scale(1.0)",
+          "31.25%": {
+            transform: "translate(-48px, 83px) scale(0.95)",  // (-1/2, -root(3)/2)
           },
-          "35%": {
-            transform: "translate(0px, 0px) scale(1.0)",
+          "37.5%": {
+            transform: "translate(-68px, 68px) scale(0.9)",
           },
-          "40%": {
-            transform: "translate(0px, -0px) scale(1.0)",
-          },
-          "45%": {
-            transform: "translate(0px, 0px) scale(1.0)",
+          "43.75%": {
+            transform: "translate(-83px, 48px) scale(0.95)",
           },
           "50%": {
-            transform: "translate(0px, -48px) scale(1.0)",
+            transform: "translate(-96px, 0px) scale(1.0)", // (-1,0)
           },
-          "55%": {
-            transform: "translate(0px, 0px) scale(1.0)",
+          "56.25%": {
+            transform: "translate(-83px, -48px) scale(1.05)",
           },
-          "60%": {
-            transform: "translate(0px, -0px) scale(1.0)",
+          "62.5%": {
+            transform: "translate(-68px, -68px) scale(1.1)",
           },
-          "65%": {
-            transform: "translate(0px, 0px) scale(1.0)",
-          },
-          "70%": {
-            transform: "translate(0px, -0px) scale(1.0)",
+          "68.75%": {
+            transform: "translate(-48px, -83px) scale(1.05)",
           },
           "75%": {
-            transform: "translate(0px, 0px) scale(1.0)",
+            transform: "translate(0px, -96px) scale(1.0)", // (0,1)
           },
-          "80%": {
-            transform: "translate(0px, -0px) scale(1.0)",
+          "81.25%": {
+            transform: "translate(48px, -83px) scale(0.95)",
           },
-          "85%": {
-            transform: "translate(0px, 0px) scale(1.0)",
+          "87.5%": {
+            transform: "translate(68px, -68px) scale(0.9)",
           },
-          "90%": {
-            transform: "translate(0px, -0px) scale(1.0)",
+          "93.75%": {
+            transform: "translate(96px, -48px) scale(0.95)",
           },
-          "95%": {
-            transform: "translate(0px, 0px) scale(1.0)",
-          },
-          "100%": {
-            transform: "translate(0px, 0px) scale(1.0)",
+          "100.0%": {
+            transform: "translate(96px, 0px) scale(1.0)", // (1,0)
           },
         },
       },
