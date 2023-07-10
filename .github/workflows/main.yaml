@@ -1,0 +1,13 @@
+name: "dev build"
+on:
+  workflow_dispatch:
+env:
+  FOO: bar
+jobs:
+  build:
+    name: "build"
+    runs-on: ubuntu-latest
+    steps:
+      - name: print
+        run: |
+          echo "Hello"

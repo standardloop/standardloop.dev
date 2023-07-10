@@ -2,24 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-    .animation-delay-1 {
-      animation-delay: 1s;
-    }
-    .animation-delay-5 {
-      animation-delay: 5s;
-    }
-    .animation-delay-10 {
-      animation-delay: 10s;
-    }
-    .animation-delay-15 {
-      animation-delay: 15s;
-    }
-    .animation-delay-20 {
-      animation-delay: 20s;
-    }
-  }
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
