@@ -2,17 +2,16 @@ import Head from 'next/head'
 import Link from 'next/link'
 export default function Home() {
   return (
-    <div className="flex min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="flex min-h-screen bg-gray-50 flex items-center justify-center cursor-default">
       <Head>
         <title>standardloop.dev</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1 className="text-6xl absolute top-10 font-extrabold text-emerald-500">
-        <Link href="/">standardloop.dev</Link>
-      </h1>
-      <h1 className="text-6xl absolute top-10 left-10 font-extrabold text-emerald-500">
-        <Link href="/animations">animations</Link>
-      </h1>
-    </div>
+      <Link href="/">
+        <div className="text-6xl font-extrabold text-emerald-500 cursor-pointer">
+          standardloop.dev
+        </div>
+      </Link>
+    </div >
   )
 }
