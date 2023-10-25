@@ -9,8 +9,8 @@ export default function Home() {
         <title>standardloop.dev</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Link href="/">
-        <div className="text-6xl font-extrabold text-emerald-500 cursor-pointer">
+      <Link href="/landing">
+        <div className="text-9xl font-extrabold text-emerald-500 cursor-pointer">
           standardloop.dev
         </div>
       </Link>
