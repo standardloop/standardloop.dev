@@ -2,7 +2,7 @@
   "name": "standardloop.dev",
   "version": "0.1.0",
   "private": true,
-  "license": "No-License",
+  "license": "NOLICENSE",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

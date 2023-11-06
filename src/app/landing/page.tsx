@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 export default function Landing() {
-
     return (
         <div className="flex min-h-screen bg-gray-900 flex items-center justify-center cursor-default">
             <Head>
