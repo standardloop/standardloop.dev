@@ -1,0 +1,12 @@
+---
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - echo "Hello World"
+    silent: true
+
+  zensical:clear:
+    cmds:
+      - rm -r ./.cache 

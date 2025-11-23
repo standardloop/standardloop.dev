@@ -1,11 +1,3 @@
-# ============================================================================
-#
-# The configuration produced by default is meant to highlight the features
-# that Zensical provides and to serve as a starting point for your own
-# projects.
-#
-# ============================================================================
-
 [project]
 
 # The site_name is shown in the page header and the browser window title
@@ -17,7 +9,7 @@ site_name = "standardloop.dev"
 # meaningful description of the site content for use by search engines.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_description
-site_description = "A new project generated from the default template project."
+site_description = "My personal website"
 
 # The site_author attribute. This is used in the HTML head element.
 #
@@ -27,7 +19,7 @@ site_author = "StandardLoop"
 # The site_url is the canonical URL for your site. When building online
 # documentation you should set this.
 # Read more: https://zensical.org/docs/setup/basics/#site_url
-#site_url = "https://www.example.com/"
+site_url = "https://standardloop.dev"
 
 # The copyright notice appears in the page footer and can contain an HTML
 # fragment.
@@ -44,10 +36,13 @@ Copyright &copy; 2025 StandardLoop
 # can be defined using TOML syntax.
 #
 # Read more: https://zensical.org/docs/setup/navigation/
-# nav = [
-#   { "Get started" = "index.md" },
-#   { "Markdown in 5min" = "markdown.md" },
-# ]
+nav = [
+    { "Home" = "index.md" },
+    { "Links" = "links.md" },
+    { "Tech Articles" = [
+        "tech-articles/intro-to-kind.md",
+    ] },
+]
 
 # With the "extra_css" option you can add your own CSS styling to customize
 # your Zensical project according to your needs. You can add any number of
@@ -302,3 +297,13 @@ toggle.name = "Switch to light mode"
 #[[project.extra.social]]
 #icon = "fontawesome/brands/github"
 #link = "https://github.com/user/repo"
+
+[project.markdown_extensions.pymdownx.snippets]
+url_download = true
+
+[project.markdown_extensions.pymdownx.highlight]
+line_spans = "__span"
+anchor_linenums = true
+pygments_lang_class = true
+
+[project.markdown_extensions.pymdownx.superfences]
