@@ -46,7 +46,7 @@ nav = [
         ] },
         { "Taskfile" = [
             "tech-articles/taskfile/rancher.md",
-            "tech-articles/taskfile/kind.md",
+            "tech-articles/taskfile/multicluster-kind.md",
             "tech-articles/taskfile/helm.md",
         ] },
         { "C" = [
