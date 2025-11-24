@@ -6,4 +6,5 @@ icon: lucide/list-tree
 
 - Medium: [@standardloop](https://medium.com/@standardloop)
 - GitHub: [/standardloop](https://github.com/standardloop)
-- YouTube [/StandardLoop](https://www.youtube.com/@StandardLoop)
+- YouTube: [/StandardLoop](https://www.youtube.com/@StandardLoop)
+<!-- - Email: test@gmail.com -->
