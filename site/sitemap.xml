@@ -1,27 +1,13 @@
+{#-
+  This file was automatically generated - do not edit
+-#}
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {%- for page in pages -%}
+    {%- if page.canonical_url %}
       <url>
-        <loc>https://www.standardloop.dev/</loc>
+        <loc>{{ page.canonical_url }}</loc>
       </url>
-      <url>
-        <loc>https://www.standardloop.dev/links/</loc>
-      </url>
-      <url>
-        <loc>https://www.standardloop.dev/tech-articles/kind/intro-to-kind/</loc>
-      </url>
-      <url>
-        <loc>https://www.standardloop.dev/tech-articles/kind/kind-gateway-api/</loc>
-      </url>
-      <url>
-        <loc>https://www.standardloop.dev/tech-articles/taskfile/rancher/</loc>
-      </url>
-      <url>
-        <loc>https://www.standardloop.dev/tech-articles/taskfile/multicluster-kind/</loc>
-      </url>
-      <url>
-        <loc>https://www.standardloop.dev/tech-articles/taskfile/helm/</loc>
-      </url>
-      <url>
-        <loc>https://www.standardloop.dev/tech-articles/c/dylib-on-macos/</loc>
-      </url>
+    {%- endif -%}
+  {%- endfor %}
 </urlset>
