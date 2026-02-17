@@ -31,7 +31,7 @@ site_url = "https://www.standardloop.dev"
 #
 # Read more: https://zensical.org/docs/setup/basics/#copyright
 copyright = """
-Copyright &copy; 2025 StandardLoop
+Copyright &copy; 2026 StandardLoop
 """
 
 nav = [
