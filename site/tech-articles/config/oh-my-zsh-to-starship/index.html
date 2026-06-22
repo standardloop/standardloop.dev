@@ -12,34 +12,34 @@
         <meta name="author" content="StandardLoop">
       
       
-        <link rel="canonical" href="https://www.standardloop.dev/">
+        <link rel="canonical" href="https://www.standardloop.dev/tech-articles/config/oh-my-zsh-to-starship/">
       
       
+        <link rel="prev" href="../../c/dylib-on-macos/">
       
-        <link rel="next" href="./tech-articles/kind/intro-to-kind/">
       
       
         
       
       
-      <link rel="icon" href="./assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="zensical-0.0.46">
     
     
       
-        <title>Intro - standardloop.dev</title>
+        <title>Moving from oh-my-zsh to starhip - standardloop.dev</title>
       
     
     
       
         
       
-      <link rel="stylesheet" href="./assets/stylesheets/modern/main.19d3147f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/modern/main.19d3147f.min.css">
       
         
           
         
-        <link rel="stylesheet" href="./assets/stylesheets/modern/palette.dfe2e883.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
       
       
 
@@ -58,7 +58,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    <script>__md_scope=new URL("../../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
     
       
 
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#intro" class="md-skip">
+        <a href="#moving-from-oh-my-zsh-to-starhip" class="md-skip">
           Skip to content
         </a>
       
@@ -99,7 +99,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="" title="standardloop.dev" class="md-header__button md-logo" aria-label="standardloop.dev" data-md-component="logo">
+    <a href="../../.." title="standardloop.dev" class="md-header__button md-logo" aria-label="standardloop.dev" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Intro
+              Moving from oh-my-zsh to starhip
             
           </span>
         </div>
@@ -195,11 +195,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
         
   
   Home
@@ -213,25 +211,7 @@
   
   
   
-  
     
-      
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-      
-  
-  
   
   
     
@@ -241,12 +221,34 @@
       
         
       
+        
+      
+        
+      
     
     
     
     
-      <li class="md-tabs__item">
-        <a href="./tech-articles/kind/intro-to-kind/" class="md-tabs__link">
+      
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../kind/intro-to-kind/" class="md-tabs__link">
           
   
   Tech Articles
@@ -288,7 +290,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="" title="standardloop.dev" class="md-nav__button md-logo" aria-label="standardloop.dev" data-md-component="logo">
+    <a href="../../.." title="standardloop.dev" class="md-nav__button md-logo" aria-label="standardloop.dev" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
@@ -315,19 +317,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      
-      
-      
-        
-      
-      
-      <a href="" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -344,7 +337,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -353,8 +345,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -370,19 +364,20 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -399,7 +394,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -472,7 +467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="./tech-articles/kind/intro-to-kind/" class="md-nav__link">
+      <a href="../../kind/intro-to-kind/" class="md-nav__link">
         
   
   
@@ -501,7 +496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="./tech-articles/kind/kind-gateway-api/" class="md-nav__link">
+      <a href="../../kind/kind-gateway-api/" class="md-nav__link">
         
   
   
@@ -596,7 +591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="./tech-articles/taskfile/rancher/" class="md-nav__link">
+      <a href="../../taskfile/rancher/" class="md-nav__link">
         
   
   
@@ -625,7 +620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="./tech-articles/taskfile/multicluster-kind/" class="md-nav__link">
+      <a href="../../taskfile/multicluster-kind/" class="md-nav__link">
         
   
   
@@ -654,7 +649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="./tech-articles/taskfile/helm/" class="md-nav__link">
+      <a href="../../taskfile/helm/" class="md-nav__link">
         
   
   
@@ -745,7 +740,7 @@
   
   
     <li class="md-nav__item">
-      <a href="./tech-articles/c/dylib-on-macos/" class="md-nav__link">
+      <a href="../../c/dylib-on-macos/" class="md-nav__link">
         
   
   
@@ -779,8 +774,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -793,13 +790,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
         
           
           <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
@@ -819,7 +814,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -833,10 +828,38 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="./tech-articles/config/oh-my-zsh-to-starship/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Moving from oh-my-zsh to starhip
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
         
   
   
@@ -853,6 +876,116 @@
   
 
       </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Background
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Motivation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Steps
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uninstalling-and-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Uninstalling and Cleanup
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-and-configuring-starship" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Installing and Configuring Starship
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing and Configuring Starship">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-tip" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Quick Tip
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-one-thing-that-was-missing-that-i-immediately-noticed" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The One thing that was missing that I immediately noticed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -890,6 +1023,11 @@
                       
                     
                     
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
                   
                   <div class="md-sidebar__inner">
                     
@@ -901,6 +1039,103 @@
   
     
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Background
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Motivation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Steps
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uninstalling-and-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Uninstalling and Cleanup
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-and-configuring-starship" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Installing and Configuring Starship
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing and Configuring Starship">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-tip" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Quick Tip
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-one-thing-that-was-missing-that-i-immediately-noticed" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The One thing that was missing that I immediately noticed
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -918,6 +1153,104 @@
   
 
 
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../../kind/intro-to-kind/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Tech Articles
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="././" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Config
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -926,8 +1259,66 @@
   
 
 
-<h1 id="intro">Intro</h1>
-<p>Hello!</p>
+<h1 id="moving-from-oh-my-zsh-to-starhip">Moving from oh-my-zsh to starhip</h1>
+<h2 id="background">Background</h2>
+<p>https://github.com/ohmyzsh/ohmyzsh</p>
+<p><em>Oh My Zsh is an open source, community-driven framework for managing your zsh configuration.</em></p>
+<p>https://github.com/starship/starship</p>
+<p><em>The minimal, blazing-fast, and infinitely customizable prompt for any shell!</em></p>
+<h2 id="motivation">Motivation</h2>
+<p>I've been using oh-my-zsh for the past 8 years when a coworker recommended it during an internship I had.</p>
+<p>Recently I heard about starship and wanted to switch things up and see if it would be snappier.</p>
+<h2 id="steps">Steps</h2>
+<h3 id="uninstalling-and-cleanup">Uninstalling and Cleanup</h3>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$<span class="w"> </span>~/.oh-my-zsh/tools/uninstall.sh
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># This seems to create an automatic backup of the .zshrc</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># location: ~/.zshrc.omz-uninstalled-****-**-**_**-**-**</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>~/.oh-my-zsh
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>$<span class="w"> </span>code<span class="w"> </span>~/.zshrc
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Now we need to cleanup all the oh-my-zsh config that was in the .zshrc</span>
+</span></code></pre></div>
+<h3 id="installing-and-configuring-starship">Installing and Configuring Starship</h3>
+<p>I used brew for this</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$<span class="w"> </span>brew<span class="w"> </span>install<span class="w"> </span>starship
+</span></code></pre></div>
+<p>I've started with a simple preset</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$<span class="w"> </span>starship<span class="w"> </span>preset<span class="w"> </span>plain-text-symbols<span class="w"> </span>-o<span class="w"> </span>~/.config/starsip.toml
+</span></code></pre></div>
+<p>Now I'll edit it slightly...
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$<span class="w"> </span>code<span class="w"> </span>~/.config/starship.toml
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># ...</span>
+</span></code></pre></div></p>
+<p>Here are some sections that I have changed:</p>
+<div class="language-toml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;$directory$git_branch$character&quot;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">add_newline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">[character]</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">success_symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;[&gt;](bold green)&quot;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">error_symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;[&gt;](bold red)&quot;</span>
+</span></code></pre></div>
+<p>Looks like this now:</p>
+<pre>
+<font color="#02ddff">knowledge-transfer</font><font color="#ffffff"> on</font> <font color="#cd79fe">git main</font> <font color="#00ff40">>  </font>
+</pre>
+
+<h4 id="quick-tip">Quick Tip</h4>
+<p>use <code>starship timings</code> to check your speed.</p>
+<pre>
+<font color="#02ddff">knowledge-transfer</font><font color="#ffffff"> on</font> <font color="#cd79fe">git main</font> <font color="#00ff40">></font><font color="#ffffff"> starship timings</font>
+
+ Here are the timings of modules in your prompt (>=1ms or output):
+ directory   -  22ms  -   "<font color="#02ddff">knowledge-transfer</font> "
+ character   -  <1ms  -   "<font color="#00ff40">> </font>"
+ git_branch  -  <1ms  -   "on <font color="#cd79fe">git main</font> "
+</pre>
+
+<h3 id="the-one-thing-that-was-missing-that-i-immediately-noticed">The One thing that was missing that I immediately noticed</h3>
+<p>The bind keys for moving the front and back of the prompt with the macOS function keys!</p>
+<p>Add them by adding these lines to your <code>~/.zshrc</code> config:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>bindkey<span class="w"> </span><span class="s2">&quot;^[[H&quot;</span><span class="w"> </span>beginning-of-line
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>bindkey<span class="w"> </span><span class="s2">&quot;^[[F&quot;</span><span class="w"> </span>end-of-line
+</span></code></pre></div>
 
 
 
@@ -969,22 +1360,22 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
-        
           
-          <a href="./tech-articles/kind/intro-to-kind/" class="md-footer__link md-footer__link--next" aria-label="Next: Introduction to Local Kubernetes Using Kind">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Introduction to Local Kubernetes Using Kind
-              </div>
-            </div>
+          <a href="../../c/dylib-on-macos/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Creating a C Dylib on macOS">
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Creating a C Dylib on macOS
+              </div>
             </div>
           </a>
+        
         
       </nav>
     
@@ -1057,10 +1448,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate":null,"base":".","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","header.autohide","navigation.expand","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.tabs","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight"],"search":"./assets/javascripts/workers/search.b6b7e04f.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","header.autohide","navigation.expand","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.tabs","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight"],"search":"../../../assets/javascripts/workers/search.b6b7e04f.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
     
     
-      <script src="./assets/javascripts/bundle.ee611ef6.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.ee611ef6.min.js"></script>
       
     
   </body>

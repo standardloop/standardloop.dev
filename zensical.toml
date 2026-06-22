@@ -49,6 +49,9 @@ nav = [
         { "C" = [
             "tech-articles/c/dylib-on-macos.md",
         ] },
+        { "Config" = [
+            "tech-articles/config/oh-my-zsh-to-starship.md",
+        ] },
     ] },
 ]
 # { "Hire Me" = "hire-me.md" },
