@@ -53,6 +53,28 @@ nav = [
             "tech-articles/config/oh-my-zsh-to-starship.md",
         ] },
     ] },
+    { "Personal Projects" = [
+        { "C" = [
+            "personal-projects/c/c-json.md",
+            "personal-projects/c/cerver.md",
+            "personal-projects/c/seashell.md",
+            "personal-projects/c/do.md",
+            "personal-projects/c/c-util.md",
+            "personal-projects/c/c-logger.md",
+        ] },
+        { "SRE" = [
+            "personal-projects/sre/playground.md",
+            "personal-projects/sre/taskfiles.md",
+        ] },
+        { "JS" = [
+            "personal-projects/js/castlewars.md",
+        ] },
+        { "Misc" = [
+            "personal-projects/misc/standardloop.dev.md",
+            "personal-projects/misc/knowledge-transfer.md",
+        ] },
+    ] },
+    { "Open Source Contributions" = "opensource-contributions/index.md" },
 ]
 # { "Hire Me" = "hire-me.md" },
 
@@ -107,7 +129,7 @@ nav = [
 # - https://zensical.org/docs/setup/logo-and-icons/#favicon
 # - https://developer.mozilla.org/en-US/docs/Glossary/Favicon
 #
-#favicon = "assets/images/favicon.png"
+# favicon = "lucide/infinity"
 
 # Zensical supports more than 60 different languages. This means that the
 # labels and tooltips that Zensical's templates produce are translated.
