@@ -1,7 +1,4 @@
 ---
 icon: lucide/home
+template: "index.html"
 ---
-
-# Intro
-
-Hello!

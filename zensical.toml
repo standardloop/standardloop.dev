@@ -36,7 +36,8 @@ Copyright &copy; 2026 StandardLoop
 
 nav = [
     { "Home" = "index.md" },
-    { "Tech Articles" = [
+    { "About" = "about.md" },
+    { "Articles" = [
         { "Kind" = [
             "tech-articles/kind/intro-to-kind.md",
             "tech-articles/kind/kind-gateway-api.md",
@@ -107,6 +108,7 @@ nav = [
 # Section for configuring theme options
 # ----------------------------------------------------------------------------
 [project.theme]
+custom_dir = "overrides"
 
 # change this to "classic" to use the traditional Material for MkDocs look.
 #variant = "classic"
@@ -334,8 +336,8 @@ accent = "green"
 # - https://zensical.org/docs/setup/logo-and-icons
 # - https://zensical.org/docs/authoring/icons-emojis/#search
 # ----------------------------------------------------------------------------
-#[project.theme.icon]
-#logo = "lucide/smile"
+[project.theme.icon]
+logo = "lucide/code-xml"
 #repo = "lucide/smile"
 
 # ----------------------------------------------------------------------------
