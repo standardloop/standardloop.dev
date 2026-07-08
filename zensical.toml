@@ -49,6 +49,7 @@ nav = [
         ] },
         { "C" = [
             "tech-articles/c/dylib-on-macos.md",
+            "tech-articles/c/macos-catch-c-memory-issues.md",
         ] },
         { "Config" = [
             "tech-articles/config/oh-my-zsh-to-starship.md",
