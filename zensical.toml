@@ -70,6 +70,7 @@ nav = [
         ] },
         { "JS" = [
             "personal-projects/js/castlewars.md",
+            "personal-projects/js/life.md",
         ] },
         { "Misc" = [
             "personal-projects/misc/standardloop.dev.md",
