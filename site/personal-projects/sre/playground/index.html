@@ -2160,14 +2160,18 @@
 
 <h1 id="playground">playground</h1>
 <p><a href="../"><img alt="Kubernetes" src="https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&amp;logoColor=fff" /></a></p>
+<hr />
 <p>https://github.com/standardloop/playground</p>
-<p>This repo contains various tools and software to play around with.</p>
+<p>Playground is a local environment for playing around with various kubernetes tools.</p>
 <h2 id="tools-used">Tools Used</h2>
 <h3 id="setup">Setup</h3>
 <ul>
 <li><a href="https://github.com/go-task/task">task (go-task)</a> for the overall automation.</li>
 <li><a href="https://github.com/rancher-sandbox/rancher-desktop/">rancher-desktop</a> or <a href="https://github.com/abiosoft/colima">colima</a> for handling docker engine.</li>
-<li><a href="https://github.com/kubernetes-sigs/kind">kind</a> for provisioning a local kubernetes cluster.</li>
+<li><a href="https://github.com/kubernetes-sigs/kind">kind</a> for provisioning a local kubernetes cluster.<ul>
+<li><a href="https://kind.sigs.k8s.io/docs/user/local-registry/">local registry</a> is enabled on the cluster.</li>
+</ul>
+</li>
 <li><a href="https://github.com/kubernetes-sigs/cloud-provider-kind">cloud-provider-kind</a> for the ability to have access to <code>gatewayClassName: cloud-provider-kind</code>.</li>
 <li><a href="https://github.com/opentofu/opentofu">opentofu</a> for deploying infrastructure applications.<ul>
 <li><a href="https://github.com/kbst/terraform-provider-kustomization">kustomize provider</a> for deploying <a href="https://github.com/kubernetes-sigs/kustomize">kustomizations</a>.</li>
@@ -2198,7 +2202,7 @@
 <li><a href="https://github.com/adrienverge/yamllint">yamllint</a> for enforcing yaml rules.</li>
 <li><a href="https://github.com/norwoodj/helm-docs">helm-docs</a> for managing helm documentation.</li>
 <li><a href="https://github.com/dadav/helm-schema">helm-schema</a> for handling helm <code>values.schema.json</code> generation.</li>
-<li><a href="https://github.com/terraform-docs/terraform-docs">terraform-docs</a> for handling terraform documentation.</li>
+<li><a href="https://github.com/terraform-docs/terraform-docs">terraform-docs</a> for handling tofu documentation.</li>
 </ul>
 <h2 id="screenshot">Screenshot</h2>
 <p><img alt="alt text" src="https://raw.githubusercontent.com/standardloop/playground/refs/heads/main/docs/screenshot.png" /></p>

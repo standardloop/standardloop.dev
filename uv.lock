@@ -133,14 +133,14 @@ wheels = [
 
 [[package]]
 name = "standardloop-dev"
-version = "0.0.4"
+version = "0.0.0"
 source = { virtual = "." }
 dependencies = [
     { name = "zensical" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "zensical", specifier = ">=0.0.50" }]
+requires-dist = [{ name = "zensical" }]
 
 [[package]]
 name = "tomli"

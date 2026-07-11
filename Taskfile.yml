@@ -11,7 +11,7 @@ tasks:
     deps:
       - clean
     cmds:
-      - zensical build
+      - zensical build --clean
 
   run:
     deps:
@@ -22,4 +22,5 @@ tasks:
 
   clean:
     cmds:
-      - rm -r ./.cache 
+      - rm -rf ./.cache 
+      - rm -rf ./.venv
