@@ -7,14 +7,19 @@ tasks:
       - echo "Hello World"
     silent: true
 
-  zensical:build:
+  build:
+    deps:
+      - clean
     cmds:
       - zensical build
 
-  zensical:serve:
+  run:
+    deps:
+      - clean
+    aliases: [serve, server]
     cmds:
       - zensical serve
 
-  zensical:clear:
+  clean:
     cmds:
       - rm -r ./.cache 

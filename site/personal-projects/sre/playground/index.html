@@ -1452,6 +1452,78 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#tools-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tools Used
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tools Used">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Setup
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Infrastructure Applications
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Test Applications
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-and-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Documentation and Standards
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#screenshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Screenshot
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#spin-up" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1474,10 +1546,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mise" class="md-nav__link">
+  <a href="#mise-wip" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Mise
+        Mise WIP
       </span>
     </span>
   </a>
@@ -1848,6 +1920,78 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#tools-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tools Used
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tools Used">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Setup
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Infrastructure Applications
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Test Applications
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-and-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Documentation and Standards
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#screenshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Screenshot
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#spin-up" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -1870,10 +2014,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mise" class="md-nav__link">
+  <a href="#mise-wip" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        Mise
+        Mise WIP
       </span>
     </span>
   </a>
@@ -2015,15 +2159,56 @@
 
 
 <h1 id="playground">playground</h1>
+<p><a href="../"><img alt="Kubernetes" src="https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&amp;logoColor=fff" /></a></p>
+<p>https://github.com/standardloop/playground</p>
 <p>This repo contains various tools and software to play around with.</p>
-<p>Please run <code>task --list-all</code> to see available tasks</p>
+<h2 id="tools-used">Tools Used</h2>
+<h3 id="setup">Setup</h3>
+<ul>
+<li><a href="https://github.com/go-task/task">task (go-task)</a> for the overall automation.</li>
+<li><a href="https://github.com/rancher-sandbox/rancher-desktop/">rancher-desktop</a> or <a href="https://github.com/abiosoft/colima">colima</a> for handling docker engine.</li>
+<li><a href="https://github.com/kubernetes-sigs/kind">kind</a> for provisioning a local kubernetes cluster.</li>
+<li><a href="https://github.com/kubernetes-sigs/cloud-provider-kind">cloud-provider-kind</a> for the ability to have access to <code>gatewayClassName: cloud-provider-kind</code>.</li>
+<li><a href="https://github.com/opentofu/opentofu">opentofu</a> for deploying infrastructure applications.<ul>
+<li><a href="https://github.com/kbst/terraform-provider-kustomization">kustomize provider</a> for deploying <a href="https://github.com/kubernetes-sigs/kustomize">kustomizations</a>.</li>
+<li><a href="https://github.com/hashicorp/terraform-provider-helm">helm provider</a> for deploying <a href="https://github.com/helm/helm">helm</a> charts (this repo mostly relies on <code>flux</code> <code>HelmRelease</code> but there are a few cases of just using raw helm charts).</li>
+<li><a href="https://github.com/hashicorp/terraform-provider-null">null provider</a> mostly for using <code>local-exec</code>.</li>
+</ul>
+</li>
+<li><a href="https://github.com/fluxcd/flux2">flux</a> deployed (minimally) to have access to <code>HelmRelease</code> and <code>HelmRepository</code> crds.</li>
+</ul>
+<h3 id="infrastructure-applications">Infrastructure Applications</h3>
+<ul>
+<li><a href="https://github.com/kubernetes-sigs/metrics-server">metrics-server</a> for playing around with autoscaling.</li>
+<li><a href="https://github.com/argoproj/argo-rollouts">argo-rollouts</a> for playing around with deployment strategies.</li>
+<li><a href="https://github.com/kubernetes-sigs/headlamp">headlamp</a> as a kubernetes web UI.</li>
+<li><a href="https://github.com/istio/istio">istio</a> as the entryway into the cluster.</li>
+<li><a href="https://github.com/kiali/kiali">kiali</a> for some insights into istio.</li>
+<li><a href="https://github.com/prometheus/prometheus">prometheus</a> deployed via <code>kube-prometheus-stack</code> for metrics.</li>
+<li><a href="https://github.com/grafana/grafana">grafana</a> deploy via <a href="https://github.com/grafana/grafana-operator">grafana-operator</a> for monitoring dashboards.</li>
+<li><a href="https://github.com/bastienwirtz/homer">homer</a> as the home page of the cluster.</li>
+</ul>
+<h3 id="test-applications">Test Applications</h3>
+<ul>
+<li><a href="https://github.com/tilt-dev/tilt">tilt</a> for managing test applications in the cluster.</li>
+</ul>
+<h3 id="documentation-and-standards">Documentation and Standards</h3>
+<ul>
+<li><a href="https://github.com/j178/prek">prek</a> for pre-commit.</li>
+<li><a href="https://github.com/adrienverge/yamllint">yamllint</a> for enforcing yaml rules.</li>
+<li><a href="https://github.com/norwoodj/helm-docs">helm-docs</a> for managing helm documentation.</li>
+<li><a href="https://github.com/dadav/helm-schema">helm-schema</a> for handling helm <code>values.schema.json</code> generation.</li>
+<li><a href="https://github.com/terraform-docs/terraform-docs">terraform-docs</a> for handling terraform documentation.</li>
+</ul>
+<h2 id="screenshot">Screenshot</h2>
+<p><img alt="alt text" src="https://raw.githubusercontent.com/standardloop/playground/refs/heads/main/docs/screenshot.png" /></p>
 <h2 id="spin-up">Spin Up</h2>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$<span class="w"> </span>task
 </span></code></pre></div>
 <h2 id="clean-up">Clean Up</h2>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$<span class="w"> </span>task<span class="w"> </span>clean
 </span></code></pre></div>
-<h2 id="mise">Mise</h2>
+<h2 id="mise-wip">Mise WIP</h2>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$<span class="w"> </span>mise<span class="w"> </span>install
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>...
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>$<span class="w"> </span>mise<span class="w"> </span>uninstall<span class="w"> </span>--all
