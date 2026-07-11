@@ -2,11 +2,6 @@
 version: '3'
 
 tasks:
-  default:
-    cmds:
-      - echo "Hello World"
-    silent: true
-
   build:
     deps:
       - clean
@@ -14,13 +9,13 @@ tasks:
       - zensical build --clean
 
   run:
-    deps:
-      - clean
     aliases: [serve, server]
+    deps:
+      - build
     cmds:
       - zensical serve
 
   clean:
     cmds:
       - rm -rf ./.cache 
-      - rm -rf ./.venv
+      # - rm -rf ./.venv
