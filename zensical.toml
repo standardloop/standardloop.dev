@@ -63,6 +63,7 @@ nav = [
             "personal-projects/c/do.md",
             "personal-projects/c/c-util.md",
             "personal-projects/c/c-logger.md",
+            "personal-projects/c/c-collections.md",
         ] },
         { "SRE" = [
             "personal-projects/sre/playground.md",
@@ -353,9 +354,13 @@ link = "https://github.com/standardloop/"
 icon = "fontawesome/brands/medium"
 link = "https://medium.com/@standardloop"
 
+# [[project.extra.social]]
+# icon = "fontawesome/brands/youtube"
+# link = "https://www.youtube.com/@StandardLoop"
+
 [[project.extra.social]]
-icon = "fontawesome/brands/youtube"
-link = "https://www.youtube.com/@StandardLoop"
+icon = "fontawesome/brands/dev"
+link = "https://dev.to/standardloop"
 
 # [[project.extra.social]]
 # icon = "fontawesome/brands/google"

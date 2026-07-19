@@ -19,6 +19,6 @@ See my Tech Articles, my Personal Projects, and my Open Source Contributions.
 ```sh
 $ uv venv
 $ source .venv/bin/activate
-$ uv sync
+$ uv sync --upgrade
 $ task serve
 ```
