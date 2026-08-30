@@ -1,7 +1,9 @@
 ---
-version: '3'
+version: "3"
 
 tasks:
+  default: task --list-all
+
   build:
     deps:
       - clean
@@ -17,5 +19,5 @@ tasks:
 
   clean:
     cmds:
-      - rm -rf ./.cache 
+      - rm -rf ./.cache
       # - rm -rf ./.venv

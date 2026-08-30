@@ -64,6 +64,7 @@ nav = [
             "personal-projects/c/c-util.md",
             "personal-projects/c/c-logger.md",
             "personal-projects/c/c-collections.md",
+            "personal-projects/c/c-template.md",
         ] },
         { "SRE" = [
             "personal-projects/sre/playground.md",
