@@ -39,6 +39,7 @@ class CommandProcessor {
     if (cmd in this.commands) {
       this.commands[cmd](args);
     } else {
+      this.terminal.setIsLastError(true);
       this.terminal.printLines(
         red(`command not found: ${cmd}`) + `  ${dim("(try 'help')")}`,
       );
@@ -209,9 +210,23 @@ class CommandProcessor {
 
       sudo: () => {
         t.setIsLastError(false);
-        t.printLines(
-          red("Nice try. This terminal only has one user, and it's me."),
-        );
+        t.printLines(red("Nice try"));
+      },
+
+      easteregg: () => {
+        t.setIsLastError(false);
+        const egg = [
+          "      ████",
+          "    ██░░░░██",
+          "  ██░░░░░░░░██",
+          "  ██░░░░░░░░██",
+          "██░░░░░░░░░░░░██",
+          "██░░░░░░░░░░░░██",
+          "██░░░░░░░░░░░░██",
+          "  ██░░░░░░░░██",
+          "    ████████",
+        ];
+        t.printLines(egg);
       },
 
       pwd: () => t.printLines("/" + this.cwdPath.join("/")),
