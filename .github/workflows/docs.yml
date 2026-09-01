@@ -1,3 +1,4 @@
+---
 name: Documentation
 
 on:
@@ -18,20 +19,7 @@ jobs:
     steps:
       - uses: actions/configure-pages@v5
       - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
-        with:
-          python-version-file: ".python-version"
-      - run: python --version
-      - uses: astral-sh/setup-uv@v7
-        with:
-          version: 0.9.11
-      - run: uv --version
-      - run: |
-          uv venv
-          source .venv/bin/activate
-          uv sync
-          zensical build --clean
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: site
-      - uses: actions/deploy-pages@v5
+          path: .
+      - uses: actions/deploy-pages@v4

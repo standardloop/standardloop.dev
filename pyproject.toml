@@ -1,7 +1,0 @@
-[project]
-name = "standardloop-dev"
-version = "0.0.0"
-description = "Personal website"
-readme = "README.md"
-requires-python = ">=3.14"
-dependencies = ["zensical"]

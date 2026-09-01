@@ -1,0 +1,472 @@
+:root {
+  --white: #f2f5f8;
+  --white-dim: #8b95a1;
+  --blue: #4fa8ff;
+  --blue-dim: #3572a6;
+  --green: #46d383;
+  --green-dim: #2f8f5c;
+  --red: #e0524a;
+  --bg-void: #05070a;
+  --term-bg: #111418;
+  --hairline: rgba(255, 255, 255, 0.07);
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg-void);
+  color: var(--white);
+  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ---------- Space backdrop ---------- */
+
+#starfield {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.nebula {
+  position: fixed;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.nebula-a {
+  top: -20vmax;
+  left: -15vmax;
+  background: radial-gradient(circle, #1d3a6b 0%, transparent 70%);
+  animation: drift-a 50s ease-in-out infinite;
+}
+
+.nebula-b {
+  bottom: -25vmax;
+  right: -20vmax;
+  background: radial-gradient(circle, #1f5240 0%, transparent 70%);
+  animation: drift-b 65s ease-in-out infinite;
+}
+
+@keyframes drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(6vmax, 8vmax);
+  }
+}
+
+@keyframes drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-7vmax, -5vmax);
+  }
+}
+
+/* ---------- Floating terminal ---------- */
+
+.float-wrap {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: min(920px, 92vw);
+  height: min(600px, 78vh);
+  perspective: 1200px;
+  opacity: 1;
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+body.is-resizing .float-wrap,
+body.is-dragging .float-wrap {
+  transition: none;
+}
+
+.float-wrap.is-closed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.crt-frame.is-minimized #terminal {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.crt-frame.is-minimized ~ .rh {
+  pointer-events: none;
+}
+
+#terminal {
+  transition: opacity 0.15s ease;
+}
+
+.crt-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--term-bg);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 30px 60px -20px rgba(0, 0, 0, 0.7),
+    0 10px 24px -10px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.crt-topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  background: var(--term-bg);
+  border-bottom: 1px solid var(--hairline);
+  flex-shrink: 0;
+  touch-action: none;
+}
+
+.crt-topbar:focus-visible {
+  outline: 1px solid var(--blue);
+  outline-offset: -1px;
+}
+
+body.is-dragging {
+  user-select: none;
+}
+
+.crt-dots {
+  display: flex;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.crt-dot {
+  position: relative;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+}
+
+.crt-dot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  pointer-events: none;
+}
+
+/* Real macOS reveals all three glyphs together when hovering any of them. */
+.crt-dots:hover .crt-dot::before,
+.crt-dots:focus-within .crt-dot::before {
+  opacity: 1;
+}
+
+.crt-dot--red::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 1.5L6.5 6.5M6.5 1.5L1.5 6.5' fill='none' stroke='rgba(0,0,0,.6)' stroke-width='1.1' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.crt-dot--yellow::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.3 4H6.7' fill='none' stroke='rgba(0,0,0,.6)' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.crt-dot--green::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M4.8 1.3H6.7V3.2M3.2 6.7H1.3V4.8' fill='none' stroke='rgba(0,0,0,.6)' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.crt-dot:focus-visible {
+  outline: 1px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.crt-dot--red {
+  background: #e0524a;
+}
+
+.crt-dot--yellow {
+  background: #e0a83f;
+}
+
+.crt-dot--green {
+  background: #6fae4f;
+}
+
+.crt-title {
+  font-size: 12.5px;
+  color: var(--white-dim);
+  letter-spacing: 0.02em;
+  cursor: default;
+  user-select: none;
+}
+
+#terminal {
+  flex: 1;
+  min-height: 0;
+  padding: 8px 14px 6px;
+}
+
+/* Resize handles — placed as siblings of crt-frame (not inside it) so they can
+   straddle the visual edge even though crt-frame itself clips its rounded
+   corners with overflow: hidden. */
+.rh {
+  position: absolute;
+  z-index: 3;
+}
+
+.rh-n,
+.rh-s {
+  left: 16px;
+  right: 16px;
+  height: 10px;
+}
+.rh-n {
+  top: -5px;
+  cursor: n-resize;
+}
+.rh-s {
+  bottom: -5px;
+  cursor: s-resize;
+}
+
+.rh-e,
+.rh-w {
+  top: 16px;
+  bottom: 16px;
+  width: 10px;
+}
+.rh-e {
+  right: -5px;
+  cursor: e-resize;
+}
+.rh-w {
+  left: -5px;
+  cursor: w-resize;
+}
+
+.rh-nw,
+.rh-ne,
+.rh-sw,
+.rh-se {
+  width: 16px;
+  height: 16px;
+}
+.rh-nw {
+  top: -5px;
+  left: -5px;
+  cursor: nwse-resize;
+}
+.rh-ne {
+  top: -5px;
+  right: -5px;
+  cursor: nesw-resize;
+}
+.rh-sw {
+  bottom: -5px;
+  left: -5px;
+  cursor: nesw-resize;
+}
+.rh-se {
+  bottom: -5px;
+  right: -5px;
+  cursor: nwse-resize;
+}
+
+.rh:focus-visible {
+  outline: 1px solid var(--blue);
+  outline-offset: -2px;
+}
+
+body.is-resizing {
+  user-select: none;
+}
+
+body.is-resizing .crt-frame {
+  transition: none;
+}
+
+.reopen-btn {
+  position: fixed;
+  z-index: 5;
+  bottom: 64px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--term-bg);
+  border: 1px solid var(--hairline);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 9px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.reopen-btn.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.reopen-btn:hover,
+.reopen-btn:focus-visible {
+  border-color: var(--blue);
+  color: var(--blue);
+  outline: none;
+}
+
+.noscript-hint {
+  position: fixed;
+  z-index: 1;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--white-dim);
+  text-align: center;
+  pointer-events: none;
+}
+
+.noscript-hint code {
+  color: var(--green);
+}
+
+/* xterm overrides */
+.xterm {
+  height: 100%;
+}
+.xterm-viewport {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.2s ease;
+}
+.xterm-viewport.is-scrolling {
+  scrollbar-color: var(--white-dim) transparent;
+}
+
+.xterm-viewport::-webkit-scrollbar {
+  width: 8px;
+}
+.xterm-viewport::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.xterm-viewport.is-scrolling::-webkit-scrollbar-thumb {
+  background: var(--white-dim);
+}
+
+@media (max-width: 600px) {
+  :root {
+    font-size: 14px;
+  }
+  .float-wrap {
+    height: 74vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nebula-a,
+  .nebula-b {
+    animation: none;
+  }
+  .crt-frame {
+    transform: none !important;
+  }
+}
+
+/*
+    Shutdown: collapses the whole page to a thin line, then a point, then
+    fades out — like an old CRT powering off.
+*/
+
+@keyframes crt-power-off {
+  0% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+  55% {
+    transform: scale(1, 0.008);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.01, 0.008);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.01, 0.008);
+    opacity: 0;
+  }
+}
+
+body.is-shutting-down {
+  transform-origin: center center;
+  animation: crt-power-off 0.7s cubic-bezier(0.7, 0, 1, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.is-shutting-down {
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+}

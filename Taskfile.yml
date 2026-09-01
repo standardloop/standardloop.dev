@@ -1,23 +1,26 @@
 ---
 version: "3"
 
+vars:
+  PORT: 8080
+
 tasks:
-  default: task --list-all
-
-  build:
-    deps:
-      - clean
+  default:
+    silent: true
     cmds:
-      - zensical build --clean
-
+      - task --list-all
+    desc: |
+      List all avaiable tasks.
   run:
-    aliases: [serve, server]
-    deps:
-      - build
+    aliases: ["serve"]
     cmds:
-      - zensical serve
+      - open -a "Google Chrome" http://localhost:8080/
+      - python3 -m http.server {{.PORT}}
+    desc: |
+      Run a Python3 HTTP server to serve the static files.
 
-  clean:
+  fmt:
     cmds:
-      - rm -rf ./.cache
-      # - rm -rf ./.venv
+      - npx prettier --write .
+    desc: |
+      Format the files with prettier.

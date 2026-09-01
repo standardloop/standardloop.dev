@@ -8,17 +8,14 @@
 
 ## About
 
-My Personal Website — essentially a personal documentation website.
-
-Made with [zensical](https://github.com/zensical/zensical).
-
-See my Tech Articles, my Personal Projects, and my Open Source Contributions!
+[xterm.js](https://github.com/xtermjs/xterm.js/) client side only website for messing around.
 
 ## Run
 
 ```sh
-$ uv venv
-$ source .venv/bin/activate
-$ uv sync --upgrade
-$ task serve
+$ task
+task: Available tasks for this project:
+* default:       List all avaiable tasks.
+* fmt:           Format the files with prettier.
+* run:           Run a Python3 HTTP server to serve the static files.       (aliases: serve)
 ```

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Standardloop — Terminal</title>
+    <meta
+      name="description"
+      content="Portfolio of Standardloop, presented as an interactive terminal."
+    />
+
+    <link rel="stylesheet" href="https://unpkg.com/xterm@5.3.0/css/xterm.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="starfield" aria-hidden="true"></canvas>
+    <div class="nebula nebula-a" aria-hidden="true"></div>
+    <div class="nebula nebula-b" aria-hidden="true"></div>
+
+    <div class="float-wrap">
+      <div class="crt-frame" id="crt-frame">
+        <div class="crt-topbar">
+          <span class="crt-dots">
+            <button
+              type="button"
+              class="crt-dot crt-dot--red"
+              aria-label="Close terminal"
+              title="Close"
+            ></button>
+            <button
+              type="button"
+              class="crt-dot crt-dot--yellow"
+              aria-label="Minimize terminal"
+              title="Minimize"
+            ></button>
+            <button
+              type="button"
+              class="crt-dot crt-dot--green"
+              aria-label="Maximize terminal"
+              title="Zoom"
+            ></button>
+          </span>
+          <span class="crt-title">@standardloop.dev: ~</span>
+        </div>
+        <div id="terminal" aria-label="Interactive terminal"></div>
+      </div>
+
+      <span class="rh rh-n" data-h="" data-v="top"></span>
+      <span class="rh rh-s" data-h="" data-v="bottom"></span>
+      <span class="rh rh-e" data-h="right" data-v=""></span>
+      <span class="rh rh-w" data-h="left" data-v=""></span>
+      <span class="rh rh-nw" data-h="left" data-v="top"></span>
+      <span class="rh rh-ne" data-h="right" data-v="top"></span>
+      <span class="rh rh-sw" data-h="left" data-v="bottom"></span>
+      <span
+        class="rh rh-se"
+        data-h="right"
+        data-v="bottom"
+        role="separator"
+        aria-label="Resize terminal window"
+        tabindex="0"
+      ></span>
+    </div>
+
+    <p class="noscript-hint" id="mobile-hint">
+      Tip: type <code>help</code> to see available commands.
+    </p>
+
+    <button type="button" id="reopen-btn" class="reopen-btn">
+      Reopen terminal
+    </button>
+
+    <script src="https://unpkg.com/xterm@5.3.0/lib/xterm.js"></script>
+    <script src="https://unpkg.com/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js"></script>
+    <script src="content.js"></script>
+    <script src="terminal-engine.js"></script>
+    <script src="commands.js"></script>
+    <script src="background.js"></script>
+    <script src="terminal-window.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
