@@ -7,6 +7,7 @@ class TerminalEngine {
   } = {}) {
     this.promptHost = promptHost;
     this.promptSymbol = promptSymbol;
+    this.isLastError = false;
 
     this.getPromptPath =
       typeof getPromptPath === "function" ? getPromptPath : () => "~";
@@ -109,11 +110,19 @@ class TerminalEngine {
     this.term.write(text);
   }
 
-  getPrompt(leadingNewline = true, wasLastError = false) {
+  setPromptSymbol(symbol) {
+    this.promptSymbol = symbol;
+  }
+
+  setIsLastError(value) {
+    this.isLastError = value;
+  }
+
+  getPrompt(leadingNewline = true) {
     const newline = leadingNewline ? "\r\n" : "";
     const { blue, green, red } = this.colors;
     let prompt = `${newline}${blue(this.getPromptPath())}`;
-    if (wasLastError) {
+    if (this.isLastError) {
       prompt += ` ${red(this.promptSymbol)} `;
     } else {
       prompt += ` ${green(this.promptSymbol)} `;
@@ -121,8 +130,8 @@ class TerminalEngine {
     return prompt;
   }
 
-  writePrompt(leadingNewline = true, wasLastError = false) {
-    this.term.write(this.getPrompt(leadingNewline, wasLastError));
+  writePrompt(leadingNewline = true) {
+    this.term.write(this.getPrompt(leadingNewline));
   }
 
   printLines(content) {

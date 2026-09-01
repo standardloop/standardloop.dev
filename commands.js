@@ -59,6 +59,7 @@ class CommandProcessor {
           "  help              show this list",
           "  docs              open my documentation website",
           "  this              open my GitHub repo for this application",
+          "  symbol            sets the prompt symbol, default is >, takes one arg",
           "  about             who I am",
           "  contact           how to reach me",
           "  ls                list files in current directory",
@@ -171,6 +172,7 @@ class CommandProcessor {
         ) {
           this.cwdPath = [...this.cwdPath, target];
         } else {
+          t.setIsLastError(true);
           t.printLines(red(`cd: no such directory: ${target}`));
         }
       },
@@ -184,16 +186,33 @@ class CommandProcessor {
           target in dir &&
           (typeof dir[target] === "string" || Array.isArray(dir[target]))
         ) {
+          t.setIsLastError(false);
           t.printLines(dir[target]);
         } else {
+          t.setIsLastError(true);
           t.printLines(red(`cat: ${target}: No such file`));
         }
       },
 
-      sudo: () =>
+      symbol: (args) => {
+        const symbol = args[0];
+        if (symbol.length !== 1) {
+          t.setIsLastError(true);
+          t.printLines(
+            red(`symbol: "${symbol}" symbol must be one character only`),
+          );
+        } else {
+          t.setIsLastError(false);
+          t.setPromptSymbol(symbol);
+        }
+      },
+
+      sudo: () => {
+        t.setIsLastError(false);
         t.printLines(
           red("Nice try. This terminal only has one user, and it's me."),
-        ),
+        );
+      },
 
       pwd: () => t.printLines("/" + this.cwdPath.join("/")),
     };
