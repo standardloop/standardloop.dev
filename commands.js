@@ -58,6 +58,8 @@ class CommandProcessor {
           "Available commands:",
           "",
           "  help              show this list",
+          "  docs              open my documentation website",
+          "  this              open my GitHub repo for this application",
           "  about             who I am",
           "  contact           how to reach me",
           "  ls                list files in current directory",
@@ -65,7 +67,7 @@ class CommandProcessor {
           "  cat <file>        print a file's contents",
           "  clear             clear the screen",
           "  exit              close the terminal window",
-          "  shutdown          power off (fades out, then blanks the tab)",
+          "  shutdown          power off",
           "  whoami",
           "  banner",
           "",
@@ -78,6 +80,16 @@ class CommandProcessor {
       about: () => t.printLines(FILESYSTEM["about.txt"]),
 
       contact: () => t.printLines(FILESYSTEM["contact.txt"]),
+
+      docs: () => {
+        t.printLines("opening https://docs.standardloop.dev...");
+        window.open('https://docs.standardloop.dev', '_blank');
+      },
+
+      this: () => {
+        t.printLines("opening https://github.com/standardloop/standardloop.dev...");
+        window.open('https://github.com/standardloop/standardloop.dev', '_blank');
+      },
 
       projects: () => {
         const dir = FILESYSTEM.projects;
