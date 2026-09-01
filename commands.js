@@ -6,7 +6,6 @@ class CommandProcessor {
   }
 
   // ---------- Virtual filesystem ----------
-
   promptPath() {
     return this.cwdPath.length ? "~/" + this.cwdPath.join("/") : "~";
   }
@@ -83,12 +82,17 @@ class CommandProcessor {
 
       docs: () => {
         t.printLines("opening https://docs.standardloop.dev...");
-        window.open('https://docs.standardloop.dev', '_blank');
+        window.open("https://docs.standardloop.dev", "_blank");
       },
 
       this: () => {
-        t.printLines("opening https://github.com/standardloop/standardloop.dev...");
-        window.open('https://github.com/standardloop/standardloop.dev', '_blank');
+        t.printLines(
+          "opening https://github.com/standardloop/standardloop.dev...",
+        );
+        window.open(
+          "https://github.com/standardloop/standardloop.dev",
+          "_blank",
+        );
       },
 
       projects: () => {

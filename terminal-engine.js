@@ -1,10 +1,13 @@
 class TerminalEngine {
   constructor({
     promptHost = "standardloop.dev",
+    promptSymbol = ">",
     getPromptPath,
     onCommand,
   } = {}) {
     this.promptHost = promptHost;
+    this.promptSymbol = promptSymbol;
+
     this.getPromptPath =
       typeof getPromptPath === "function" ? getPromptPath : () => "~";
     this.onCommand = typeof onCommand === "function" ? onCommand : () => {};
@@ -12,6 +15,7 @@ class TerminalEngine {
     this.inputBuffer = "";
     this.history = [];
     this.historyIndex = -1;
+
     // Set by clearScreen() so the next prompt is drawn flush at the top,
     // with no leading blank line above it.
     this.suppressNextPromptNewline = false;
@@ -46,6 +50,7 @@ class TerminalEngine {
     this.term.loadAddon(this.fitAddon);
     this.term.open(document.getElementById("terminal"));
     this.fitAddon.fit();
+    this.prompt = "";
 
     window.addEventListener("resize", () => this.fitAddon.fit());
 
@@ -104,12 +109,20 @@ class TerminalEngine {
     this.term.write(text);
   }
 
-  writePrompt(leadingNewline = true) {
+  getPrompt(leadingNewline = true, wasLastError = false) {
     const newline = leadingNewline ? "\r\n" : "";
-    const { blue, green } = this.colors;
-    this.term.write(
-      `${newline}${blue(this.getPromptPath())} ${green(">")} `,
-    );
+    const { blue, green, red } = this.colors;
+    let prompt = `${newline}${blue(this.getPromptPath())}`;
+    if (wasLastError) {
+      prompt += ` ${red(this.promptSymbol)} `;
+    } else {
+      prompt += ` ${green(this.promptSymbol)} `;
+    }
+    return prompt;
+  }
+
+  writePrompt(leadingNewline = true, wasLastError = false) {
+    this.term.write(this.getPrompt(leadingNewline, wasLastError));
   }
 
   printLines(content) {
@@ -185,12 +198,7 @@ class TerminalEngine {
   }
 
   _replaceLine(newText) {
-    const { blue, green } = this.colors;
-    this.term.write(
-      "\r\x1b[K" +
-        `${blue(this.promptHost)}:${green(this.getPromptPath())}$ ` +
-        newText,
-    );
+    this.term.write("\r\x1b[K" + newText);
     this.inputBuffer = newText;
   }
 }
