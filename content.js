@@ -1,5 +1,5 @@
 const PORTFOLIO = {
-  name: "Standardloop",
+  name: "standardloop",
   role: "Site Reliability Engineer",
   banner: [
     "███████╗████████╗ █████╗ ███╗   ██╗██████╗  █████╗ ██████╗ ██████╗ ██╗      ██████╗  ██████╗ ██████╗",
@@ -16,12 +16,10 @@ const PORTFOLIO = {
 };
 
 const FILESYSTEM = {
-  "about.txt": ["Standardloop — SRE"],
+  "about.txt": ["standardloop — SRE"],
 
   "contact.txt": [
     `email    ${PORTFOLIO.social.email}`,
     `github   ${PORTFOLIO.social.github}`,
-    "",
-    "Fastest way to reach me is email.",
   ],
 };

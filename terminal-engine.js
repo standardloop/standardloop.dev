@@ -1,6 +1,6 @@
 class TerminalEngine {
   constructor({
-    promptHost = "@standardloop.dev",
+    promptHost = "standardloop.dev",
     getPromptPath,
     onCommand,
   } = {}) {
@@ -108,7 +108,7 @@ class TerminalEngine {
     const newline = leadingNewline ? "\r\n" : "";
     const { blue, green } = this.colors;
     this.term.write(
-      `${newline}${blue(this.promptHost)}:${green(this.getPromptPath())}$ `,
+      `${newline}${blue(this.getPromptPath())} ${green(">")} `,
     );
   }
 
