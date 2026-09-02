@@ -254,7 +254,9 @@ class CommandProcessor {
 
       js: () => {
         t.setIsLastError(false);
-        t.printLines("todo");
+        t.printLines(dim('Entering javascript mode, type "exit" to get out'));
+        t.setPromptSymbol(">");
+        t.setInJSMode(true);
       },
     };
   }

@@ -1,13 +1,15 @@
 class TerminalEngine {
   constructor({
     promptHost = "standardloop.dev",
-    promptSymbol = ">",
+    promptSymbol = "$",
     getPromptPath,
     onCommand,
   } = {}) {
     this.promptHost = promptHost;
     this.promptSymbol = promptSymbol;
     this.isLastError = false;
+
+    this.inJSMode = false;
 
     this.getPromptPath =
       typeof getPromptPath === "function" ? getPromptPath : () => "~";
@@ -121,11 +123,14 @@ class TerminalEngine {
   getPrompt(leadingNewline = true) {
     const newline = leadingNewline ? "\r\n" : "";
     const { blue, green, red } = this.colors;
-    let prompt = `${newline}${blue(this.getPromptPath())}`;
+    let prompt = `${newline}`;
+    if (!this.inJSMode) {
+      prompt += `${blue(this.getPromptPath())} `;
+    }
     if (this.isLastError) {
-      prompt += ` ${red(this.promptSymbol)} `;
+      prompt += `${red(this.promptSymbol)} `;
     } else {
-      prompt += ` ${green(this.promptSymbol)} `;
+      prompt += `${green(this.promptSymbol)} `;
     }
     return prompt;
   }
@@ -173,7 +178,28 @@ class TerminalEngine {
         if (this.inputBuffer.trim()) {
           this.history.push(this.inputBuffer);
           this.historyIndex = this.history.length;
-          this.onCommand(this.inputBuffer);
+          // TODO handle js history too
+          if (this.inJSMode) {
+            // TODO handle exit code to
+            if (this.inputBuffer.split(" ")[0] === "exit") {
+              this.setInJSMode(false);
+              this.setPromptSymbol("$");
+              this.printLines(this.colors.dim("Back in normal mode"));
+            } else {
+              try {
+                const result = (0, eval)(this.inputBuffer);
+                if (result !== undefined) {
+                  this.setIsLastError(false);
+                  this.printLines(result);
+                }
+              } catch (err) {
+                this.setIsLastError(true);
+                this.printLines(err);
+              }
+            }
+          } else {
+            this.onCommand(this.inputBuffer);
+          }
         }
         this.inputBuffer = "";
         this.writePrompt(!this.suppressNextPromptNewline);
@@ -200,6 +226,7 @@ class TerminalEngine {
           this._replaceLine("");
         }
       } else if (code === 3) {
+        // control c
         this.writePrompt(true);
         this.term.focus();
       } else if (code < 32) {
@@ -215,5 +242,9 @@ class TerminalEngine {
   _replaceLine(newText) {
     this.term.write("\r\x1b[K" + newText);
     this.inputBuffer = newText;
+  }
+
+  setInJSMode(value) {
+    this.inJSMode = value;
   }
 }
