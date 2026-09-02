@@ -150,9 +150,11 @@ class TerminalEngine {
   }
 
   boot() {
-    // this.term.write(this.colors.blue(`${PORTFOLIO.name} — ${PORTFOLIO.role}`));
-    // this.term.write(`\r\n${this.colors.dim("Type 'help' to see available commands.")}`);
-    this.writePrompt(false);
+    this.term.write(this.colors.blue("Welcome to standardloop.dev"));
+    this.term.write(
+      `\r\n${this.colors.dim("Type 'help' to see available commands.")}`,
+    );
+    this.writePrompt(true);
     this.term.focus();
   }
 
@@ -197,8 +199,12 @@ class TerminalEngine {
           this.historyIndex = this.history.length;
           this._replaceLine("");
         }
+      } else if (code === 3) {
+        this.writePrompt(true);
+        this.term.focus();
       } else if (code < 32) {
         // ignore other control chars
+        console.log(code);
       } else {
         this.inputBuffer += data;
         this.term.write(data);

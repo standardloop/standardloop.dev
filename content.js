@@ -16,8 +16,6 @@ const PORTFOLIO = {
 };
 
 const FILESYSTEM = {
-  "about.txt": ["standardloop — SRE"],
-
   "contact.txt": [
     `email    ${PORTFOLIO.social.email}`,
     `github   ${PORTFOLIO.social.github}`,

@@ -54,6 +54,7 @@ class CommandProcessor {
 
     return {
       help: () => {
+        t.setIsLastError(false);
         t.printLines([
           "Available commands:",
           "",
@@ -61,7 +62,6 @@ class CommandProcessor {
           "  docs              open my documentation website",
           "  this              open my GitHub repo for this application",
           "  symbol            sets the prompt symbol, default is >, takes one arg",
-          "  about             who I am",
           "  contact           how to reach me",
           "  ls                list files in current directory",
           "  cd <dir>          change directory (cd .. to go back)",
@@ -78,16 +78,19 @@ class CommandProcessor {
         ]);
       },
 
-      about: () => t.printLines(FILESYSTEM["about.txt"]),
-
-      contact: () => t.printLines(FILESYSTEM["contact.txt"]),
+      contact: () => {
+        t.setIsLastError(false);
+        t.printLines(FILESYSTEM["contact.txt"]);
+      },
 
       docs: () => {
+        t.setIsLastError(false);
         t.printLines("opening https://docs.standardloop.dev...");
         window.open("https://docs.standardloop.dev", "_blank");
       },
 
       this: () => {
+        t.setIsLastError(false);
         t.printLines(
           "opening https://github.com/standardloop/standardloop.dev...",
         );
@@ -99,6 +102,7 @@ class CommandProcessor {
 
       projects: () => {
         const dir = FILESYSTEM.projects;
+        t.setIsLastError(false);
         t.printLines([
           "Projects (cd projects && ls for details, or cat directly):",
           "",
@@ -106,19 +110,23 @@ class CommandProcessor {
         ]);
       },
 
-      whoami: () => t.printLines(`${PORTFOLIO.name} — ${PORTFOLIO.role}`),
-
-      banner: () => {
-        t.printLines(PORTFOLIO.banner.map((l) => blue(l)));
-        t.printLines([
-          "",
-          dim(`${PORTFOLIO.role} — type 'help' to get started`),
-        ]);
+      whoami: () => {
+        t.setIsLastError(false);
+        t.printLines(`${PORTFOLIO.name} — ${PORTFOLIO.role}`);
       },
 
-      clear: () => t.clearScreen(),
+      banner: () => {
+        t.setIsLastError(false);
+        t.printLines(PORTFOLIO.banner.map((l) => blue(l)));
+      },
+
+      clear: () => {
+        t.setIsLastError(false);
+        t.clearScreen();
+      },
 
       exit: () => {
+        t.setIsLastError(false);
         t.printLines(
           dim("Goodbye — click 'Reopen terminal' below to come back."),
         );
@@ -129,6 +137,7 @@ class CommandProcessor {
       },
 
       shutdown: () => {
+        t.setIsLastError(false);
         t.printLines(dim("Shutting down…"));
         setTimeout(() => {
           document.body.classList.add("is-shutting-down");
@@ -145,22 +154,27 @@ class CommandProcessor {
 
       ls: () => {
         const dir = this.currentDir();
-        if (!dir)
+        if (!dir) {
+          t.setIsLastError(true);
           return t.printLines(red("ls: cannot access current directory"));
+        }
         const entries = Object.entries(dir).map(([name, val]) => {
           const isDir = typeof val === "object" && !Array.isArray(val);
           return isDir ? blue(name + "/") : name;
         });
+        t.setIsLastError(false);
         t.printLines(entries.length ? entries.join("   ") : dim("(empty)"));
       },
 
       cd: (args) => {
         const target = args[0];
         if (!target || target === "~") {
+          t.setIsLastError(false);
           this.cwdPath = [];
           return;
         }
         if (target === "..") {
+          t.setIsLastError(false);
           this.cwdPath = this.cwdPath.slice(0, -1);
           return;
         }
@@ -171,6 +185,7 @@ class CommandProcessor {
           typeof dir[target] === "object" &&
           !Array.isArray(dir[target])
         ) {
+          t.setIsLastError(false);
           this.cwdPath = [...this.cwdPath, target];
         } else {
           t.setIsLastError(true);
@@ -180,7 +195,10 @@ class CommandProcessor {
 
       cat: (args) => {
         const target = args[0];
-        if (!target) return t.printLines(red("cat: missing file operand"));
+        if (!target) {
+          t.setIsLastError(true);
+          return t.printLines(red("cat: missing file operand"));
+        }
         const dir = this.currentDir();
         if (
           dir &&
@@ -229,7 +247,15 @@ class CommandProcessor {
         t.printLines(egg);
       },
 
-      pwd: () => t.printLines("/" + this.cwdPath.join("/")),
+      pwd: () => {
+        t.setIsLastError(false);
+        t.printLines("/" + this.cwdPath.join("/"));
+      },
+
+      js: () => {
+        t.setIsLastError(false);
+        t.printLines("todo");
+      },
     };
   }
 }
