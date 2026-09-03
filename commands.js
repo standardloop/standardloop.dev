@@ -50,7 +50,7 @@ class CommandProcessor {
 
   _buildCommands() {
     const t = this.terminal;
-    const { blue, dim, red } = t.colors;
+    const { blue, dim, red, green } = t.colors;
 
     return {
       help: () => {
@@ -257,6 +257,10 @@ class CommandProcessor {
         t.printLines(dim('Entering javascript mode, type "exit" to get out'));
         t.setPromptSymbol(">");
         t.setInJSMode(true);
+      },
+      version: () => {
+        t.setIsLastError(false);
+        t.printLines(green("v0.1.5"));
       },
     };
   }

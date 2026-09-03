@@ -15,6 +15,14 @@ window.terminalWindow = new TerminalWindow({
   },
 });
 
-window.background = new Background();
+let layers = [
+  { count: 500, drift: 0.5, size: [0.05, 0.1], alpha: [0.05, 0.1] },
+  { count: 100, drift: 0.75, size: [0.5, 1.2], alpha: [0.15, 0.4] },
+  { count: 50, drift: 1, size: [1.0, 1.8], alpha: [0.35, 0.65] },
+  { count: 12, drift: 1.5, size: [1.4, 2.2], alpha: [0.55, 1.0] },
+  // { count: 1, drift: 100, size: [10, 10], alpha: [1.0, 5.0] },
+];
+
+window.background = new Background(layers);
 
 terminal.boot();

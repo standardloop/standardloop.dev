@@ -1,5 +1,5 @@
 class Background {
-  constructor() {
+  constructor(layers) {
     this.reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -11,12 +11,7 @@ class Background {
     this.vh = 0;
     this.t = 0;
 
-    // Three depth layers: distant/small/dim -> near/large/bright.
-    this.LAYERS = [
-      { count: 90, drift: 4, size: [0.5, 1.2], alpha: [0.15, 0.4] },
-      { count: 55, drift: 9, size: [1.0, 1.8], alpha: [0.35, 0.65] },
-      { count: 22, drift: 16, size: [1.6, 2.6], alpha: [0.55, 0.95] },
-    ];
+    this.LAYERS = layers;
     this.stars = [];
 
     this._resizeCanvas();
@@ -52,7 +47,7 @@ class Background {
           baseAlpha:
             layer.alpha[0] + Math.random() * (layer.alpha[1] - layer.alpha[0]),
           phase: Math.random() * Math.PI * 2,
-          twinkleSpeed: 0.4 + Math.random() * 0.8,
+          twinkleSpeed: 0.4 + Math.random() * 0.8, // todo
           drift: layer.drift,
         });
       }
