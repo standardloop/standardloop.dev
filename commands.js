@@ -1,8 +1,9 @@
 class CommandProcessor {
-  constructor(terminal) {
+  constructor(terminal, osInfo) {
     this.terminal = terminal;
     this.cwdPath = []; // path segments from root; [] = home
     this.commands = this._buildCommands();
+    this.osInfo = osInfo;
   }
 
   // ---------- Virtual filesystem ----------
@@ -31,7 +32,7 @@ class CommandProcessor {
 
   // ---------- Running a command ----------
 
-  run(raw) {
+  async run(raw) {
     const trimmed = raw.trim();
     if (!trimmed) return;
     const [cmd, ...args] = trimmed.split(/\s+/);
@@ -46,8 +47,21 @@ class CommandProcessor {
     }
   }
 
+  fastfetchorneofetch() {
+    const t = this.terminal;
+    const { green } = t.colors;
+
+    t.setIsLastError(false);
+    t.printLines([
+      `standardloop.dev`,
+      `----------------`,
+      `OS: ${this.osInfo.modernHints.osName} ${this.osInfo.modernHints.osVersion} ${this.osInfo.modernHints.architecture}`,
+      ``,
+    ]);
+  }
   // ---------- Commands ----------
 
+  // We need to figure out how to support async here.
   _buildCommands() {
     const t = this.terminal;
     const { blue, dim, red, green } = t.colors;
@@ -254,13 +268,19 @@ class CommandProcessor {
 
       js: () => {
         t.setIsLastError(false);
-        t.printLines(dim('Entering javascript mode, type "exit" to get out'));
+        t.printLines(dim('Entering javascript mode, type ".exit" to get out'));
         t.setPromptSymbol(">");
         t.setInJSMode(true);
       },
       version: () => {
         t.setIsLastError(false);
         t.printLines(green("v0.1.5"));
+      },
+      fastfetch: () => {
+        this.fastfetchorneofetch();
+      },
+      neofetch: () => {
+        this.fastfetchorneofetch();
       },
     };
   }

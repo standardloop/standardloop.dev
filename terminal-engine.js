@@ -165,7 +165,7 @@ class TerminalEngine {
 
   // ---------- Input handling ----------
 
-  _bindInput() {
+  async _bindInput() {
     this.term.onData((data) => {
       const code = data.charCodeAt(0);
 
@@ -181,7 +181,7 @@ class TerminalEngine {
           // TODO handle js history too
           if (this.inJSMode) {
             // TODO handle exit code to
-            if (this.inputBuffer.split(" ")[0] === "exit") {
+            if (this.inputBuffer.split(" ")[0] === ".exit") {
               this.setInJSMode(false);
               this.setPromptSymbol("$");
               this.printLines(this.colors.dim("Back in normal mode"));
@@ -227,6 +227,8 @@ class TerminalEngine {
         }
       } else if (code === 3) {
         // control c
+        this.setIsLastError(false);
+        this.inputBuffer = "";
         this.writePrompt(true);
         this.term.focus();
       } else if (code < 32) {
