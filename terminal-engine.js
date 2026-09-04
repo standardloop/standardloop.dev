@@ -177,9 +177,9 @@ class TerminalEngine {
               try {
                 const result = (0, eval)(this.inputBuffer);
                 if (result !== undefined) {
-                  this.setIsLastError(false);
                   this.printLines(result);
                 }
+                this.setIsLastError(false);
               } catch (err) {
                 this.setIsLastError(true);
                 this.printLines(err);
@@ -247,6 +247,9 @@ class TerminalEngine {
         this.resetInputBuffer();
         this.writePrompt(true);
         this.term.focus();
+      } else if (code === 27) {
+        this.term.write(`\x1b[${this.inputBufferCursorIndex}D`);
+        this.inputBufferCursorIndex = 0;
       } else if (code < 32) {
         // ignore other control chars
         console.log(code);
