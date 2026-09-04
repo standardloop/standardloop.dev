@@ -171,7 +171,7 @@ class CommandProcessor {
       exit: () => {
         t.setIsLastError(false);
         t.printLines(
-          dim("Goodbye — click 'Reopen terminal' below to come back."),
+          dim("Goodbye"),
         );
         if (window.terminalWindow) {
           // Let the farewell line actually render before the window closes.

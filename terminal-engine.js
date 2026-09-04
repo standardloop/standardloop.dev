@@ -173,18 +173,13 @@ class TerminalEngine {
       const code = data.charCodeAt(0);
 
       if (data === "\r") {
-        // Enter — no explicit newline here: an empty command has nothing to
-        // print (so writePrompt's own leading newline is the only line
-        // break needed), and a non-empty command's first output line
-        // already supplies one via printLines. Writing one here too would
-        // double up.
         if (this.inputBuffer.trim()) {
           this.history.push(this.inputBuffer);
           this.historyIndex = this.history.length;
           // TODO handle js history too
           if (this.inJSMode) {
-            // TODO handle exit code to
             if (this.inputBuffer.split(" ")[0] === ".exit") {
+              this.setIsLastError(false);
               this.setInJSMode(false);
               this.setPromptSymbol("$");
               this.printLines(this.colors.dim("Back in normal mode"));
@@ -228,6 +223,10 @@ class TerminalEngine {
           this.historyIndex = this.history.length;
           this._replaceLine("");
         }
+      } else if (data === "\x1b[C") {
+        alert("right arrow");
+      } else if (data === "\x1b[D") {
+        alert("left arrow");
       } else if (code === 3) {
         // control c
         this.setIsLastError(false);
