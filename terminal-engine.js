@@ -251,9 +251,36 @@ class TerminalEngine {
         // ignore other control chars
         console.log(code);
       } else {
+        const firstPart = this.inputBuffer.slice(
+          0,
+          this.inputBufferCursorIndex,
+        );
+        const secondPart = this.inputBuffer.slice(this.inputBufferCursorIndex);
+
+        this.inputBuffer = firstPart + data + secondPart;
         this.inputBufferCursorIndex += data.length;
-        this.inputBuffer += data;
-        this.term.write(data);
+
+        if (
+          this.inputBufferCursorIndex - data.length ===
+          this.inputBuffer.length - data.length
+        ) {
+          this.term.write(data);
+        } else {
+          // typing in between (typing after using left arrow)
+          const fullLineText = this.getPrompt(false) + this.inputBuffer;
+          this.term.write("\x1b[?25l\r\x1b[K" + fullLineText); // hide cursor
+
+          const totalLength = fullLineText.length;
+          const promptLength = this.getPrompt(false).length;
+          const targetVisualCursor = promptLength + this.inputBufferCursorIndex;
+          const moveLeftCount = totalLength - targetVisualCursor;
+
+          if (moveLeftCount > 0) {
+            this.term.write(`\x1b[${moveLeftCount}D`);
+          }
+
+          this.term.write("\x1b[?25h"); // show cursor
+        }
       }
     });
   }
