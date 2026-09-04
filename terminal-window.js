@@ -111,15 +111,6 @@ class TerminalWindow {
     this._applyPosition();
   }
 
-  _savePosition() {
-    // Persistence disabled — position no longer saved across page loads.
-    // try {
-    //   localStorage.setItem("portfolio-terminal-position", JSON.stringify({ x: this.posX, y: this.posY }));
-    // } catch (e) {
-    //   /* storage may be unavailable — safe to ignore */
-    // }
-  }
-
   // ============================================================
   // Size
   // ============================================================
@@ -260,7 +251,6 @@ class TerminalWindow {
       if (!dragging) return;
       dragging = false;
       document.body.classList.remove("is-dragging");
-      this._savePosition();
     };
 
     this.topbar.addEventListener("pointerdown", onPointerDown);
@@ -288,7 +278,6 @@ class TerminalWindow {
       e.preventDefault();
       this._clampPosition();
       this._applyPosition();
-      this._savePosition();
     });
 
     // Keep the window reachable if the viewport shrinks (e.g. rotating a phone).

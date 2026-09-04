@@ -18,7 +18,7 @@ class TerminalEngine {
       typeof getPromptPath === "function" ? getPromptPath : () => "~";
     this.onCommand = typeof onCommand === "function" ? onCommand : () => {};
 
-    this.inputBuffer = "";
+    this.resetInputBuffer();
     this.history = [];
     this.historyIndex = -1;
 
@@ -29,6 +29,7 @@ class TerminalEngine {
     this.colors = colors;
 
     this.term = new Terminal({
+      cursorStyle: "block", // https://xtermjs.org/docs/api/terminal/interfaces/iterminaloptions/#optional-cursorstyle
       cursorBlink: true,
       fontFamily: "'IBM Plex Mono', monospace",
       fontSize: 15,
@@ -151,9 +152,14 @@ class TerminalEngine {
     this.term.focus();
   }
 
+  resetInputBuffer() {
+    this.inputBufferCursorIndex = 0;
+    this.inputBuffer = "";
+  }
+
   // ---------- Input handling ----------
 
-  async _bindInput() {
+  _bindInput() {
     this.term.onData((data) => {
       const code = data.charCodeAt(0);
 
@@ -184,14 +190,19 @@ class TerminalEngine {
             this.onCommand(this.inputBuffer);
           }
         }
-        this.inputBuffer = "";
+        this.resetInputBuffer();
         this.writePrompt(!this.suppressNextPromptNewline);
         this.suppressNextPromptNewline = false;
       } else if (code === 127) {
         // Backspace
         if (this.inputBuffer.length > 0) {
-          this.inputBuffer = this.inputBuffer.slice(0, -1);
-          this.term.write("\b \b");
+          this.inputBuffer =
+            this.inputBuffer.slice(0, this.inputBufferCursorIndex - 1) +
+            this.inputBuffer.slice(this.inputBufferCursorIndex);
+          if (this.inputBufferCursorIndex > 0) {
+            this.inputBufferCursorIndex--;
+          }
+          this._replaceLine(this.inputBuffer);
         }
       } else if (data === "\x1b[A") {
         // Up arrow — previous history
@@ -209,19 +220,28 @@ class TerminalEngine {
           this._replaceLine("");
         }
       } else if (data === "\x1b[C") {
-        alert("right arrow");
+        // Right arrow
+        if (this.inputBufferCursorIndex < this.inputBuffer.length) {
+          this.inputBufferCursorIndex++;
+        }
+        this.term.write(data);
       } else if (data === "\x1b[D") {
-        alert("left arrow");
+        // Left arror
+        if (this.inputBufferCursorIndex > 0) {
+          this.inputBufferCursorIndex--;
+        }
+        this.term.write(data);
       } else if (code === 3) {
         // control c
         this.setIsLastError(false);
-        this.inputBuffer = "";
+        this.resetInputBuffer();
         this.writePrompt(true);
         this.term.focus();
       } else if (code < 32) {
         // ignore other control chars
         console.log(code);
       } else {
+        this.inputBufferCursorIndex += data.length;
         this.inputBuffer += data;
         this.term.write(data);
       }
@@ -229,7 +249,7 @@ class TerminalEngine {
   }
 
   _replaceLine(newText) {
-    this.term.write("\r\x1b[K" + newText);
+    this.term.write("\r\x1b[K" + this.getPrompt(false) + newText);
     this.inputBuffer = newText;
   }
 
