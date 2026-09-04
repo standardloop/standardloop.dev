@@ -247,9 +247,18 @@ class TerminalEngine {
         this.resetInputBuffer();
         this.writePrompt(true);
         this.term.focus();
-      } else if (code === 27) {
-        this.term.write(`\x1b[${this.inputBufferCursorIndex}D`);
-        this.inputBufferCursorIndex = 0;
+      } else if (data === "\x1b[H") {
+        // fn + left arrow
+        if (this.inputBufferCursorIndex > 0) {
+          this.term.write(`\x1b[${this.inputBufferCursorIndex}D`);
+          this.inputBufferCursorIndex = 0;
+        }
+      } else if (data === "\x1b[F") {
+        // fn + right arrow
+        if (this.inputBuffer.length > 0) {
+          this.term.write(`\x1b[${this.inputBuffer.length}C`);
+          this.inputBufferCursorIndex = this.inputBuffer.length;
+        }
       } else if (code < 32) {
         // ignore other control chars
         console.log(code);
