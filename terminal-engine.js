@@ -158,7 +158,6 @@ class TerminalEngine {
   }
 
   // ---------- Input handling ----------
-
   _bindInput() {
     this.term.onData((data) => {
       const code = data.charCodeAt(0);
@@ -189,20 +188,31 @@ class TerminalEngine {
           } else {
             this.onCommand(this.inputBuffer);
           }
+        } else {
+          this.setIsLastError(false);
         }
         this.resetInputBuffer();
         this.writePrompt(!this.suppressNextPromptNewline);
         this.suppressNextPromptNewline = false;
       } else if (code === 127) {
         // Backspace
-        if (this.inputBuffer.length > 0) {
+        if (this.inputBuffer.length > 0 && this.inputBufferCursorIndex > 0) {
           this.inputBuffer =
             this.inputBuffer.slice(0, this.inputBufferCursorIndex - 1) +
             this.inputBuffer.slice(this.inputBufferCursorIndex);
-          if (this.inputBufferCursorIndex > 0) {
-            this.inputBufferCursorIndex--;
+
+          this.inputBufferCursorIndex--;
+
+          const fullLineText = this.getPrompt(false) + this.inputBuffer;
+          this.term.write("\r\x1b[K" + fullLineText);
+
+          const totalLength = fullLineText.length;
+          const promptLength = this.getPrompt(false).length;
+          const targetVisualCursor = promptLength + this.inputBufferCursorIndex;
+          const moveLeftCount = totalLength - targetVisualCursor;
+          if (moveLeftCount > 0) {
+            this.term.write(`\x1b[${moveLeftCount}D`);
           }
-          this._replaceLine(this.inputBuffer);
         }
       } else if (data === "\x1b[A") {
         // Up arrow — previous history
@@ -223,14 +233,14 @@ class TerminalEngine {
         // Right arrow
         if (this.inputBufferCursorIndex < this.inputBuffer.length) {
           this.inputBufferCursorIndex++;
+          this.term.write(data);
         }
-        this.term.write(data);
       } else if (data === "\x1b[D") {
-        // Left arror
+        // Left arrow
         if (this.inputBufferCursorIndex > 0) {
           this.inputBufferCursorIndex--;
+          this.term.write(data);
         }
-        this.term.write(data);
       } else if (code === 3) {
         // control c
         this.setIsLastError(false);
@@ -251,6 +261,7 @@ class TerminalEngine {
   _replaceLine(newText) {
     this.term.write("\r\x1b[K" + this.getPrompt(false) + newText);
     this.inputBuffer = newText;
+    this.inputBufferCursorIndex = newText.length;
   }
 
   setInJSMode(value) {
