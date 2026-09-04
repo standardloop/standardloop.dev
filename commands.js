@@ -1,11 +1,11 @@
 class CommandProcessor {
-  constructor(terminal, osInfo, osLogos) {
+  constructor(terminal, osInfo, osLogos, version) {
     this.terminal = terminal;
     this.cwdPath = []; // path segments from root; [] = home
     this.commands = this._buildCommands();
     this.osInfo = osInfo;
     this.osLogos = osLogos;
-    this.version = "v0.1.5";
+    this.version = version;
   }
 
   // ---------- Virtual filesystem ----------

@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     colors,
   );
 
-  commands = new CommandProcessor(terminal, osInfo, osLogos);
+  commands = new CommandProcessor(terminal, osInfo, osLogos, VERSION);
 
   window.terminalWindow = new TerminalWindow({
     fit: () => {

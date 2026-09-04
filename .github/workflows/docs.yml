@@ -17,9 +17,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/configure-pages@v6
       - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
+      - name: Inject Release Version into JS
+        run: |
+          NEW_VERSION="${{ github.ref_name }}"
+          sed -i.bak -E "s/(const VERSION = \")[^\"]+(\";)/\1${NEW_VERSION}\2/" version.js
+          rm version.js.bak
       - uses: actions/upload-pages-artifact@v5
         with:
           path: .
-      - uses: actions/deploy-pages@v5
+      - id: deployment
+        uses: actions/deploy-pages@v5
