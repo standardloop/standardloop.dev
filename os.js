@@ -70,54 +70,99 @@ async function getParsedBrowserAndOSData() {
   return data;
 }
 
-const macOSArt = [
-  "                      ..'         ",
-  "                  ,xNMM.          ",
-  "                .OMMMMo           ",
-  '                lMM"              ',
-  "     .;loddo:.  .olloddol;.       ",
-  "   cKMMMMMMMMMMNWMMMMMMMMMM0:     ",
-  " .KMMMMMMMMMMMMMMMMMMMMMMMWd.     ",
-  " XMMMMMMMMMMMMMMMMMMMMMMMX.       ",
-  ";MMMMMMMMMMMMMMMMMMMMMMMM:        ",
-  ":MMMMMMMMMMMMMMMMMMMMMMMM:        ",
-  ".MMMMMMMMMMMMMMMMMMMMMMMMX.       ",
-  " kMMMMMMMMMMMMMMMMMMMMMMMMWd.     ",
-  " 'XMMMMMMMMMMMMMMMMMMMMMMMMMMk    ",
-  "  'XMMMMMMMMMMMMMMMMMMMMMMMMK.    ",
-  "    kMMMMMMMMMMMMMMMMMMMMMMd      ",
-  "     ;KMMMMMMMWXXWMMMMMMMk.       ",
-  '       "cooc*"    "*coo\'"         ',
-  "                                  ",
-];
-
 const emptyLine = "                                  ";
 
-function getOSLogo(os, linecount) {
-  // console.log(linecount);
-  // console.log(macOSArt.length);
-  if (os === "macOS") {
-    if (linecount > macOSArt.length) {
-      let macOsArtWithMoreNewlines = macOSArt;
-      for (let i = 0; i < linecount - macOSArt.length; i++) {
-        macOsArtWithMoreNewlines.push(emptyLine);
-      }
-      return macOsArtWithMoreNewlines;
-    } else {
-      return macOSArt;
-    }
+function addPadding(line) {
+  const width = emptyLine.length;
+  if (line.length < width) {
+    let dynamicSpaces = " ".repeat(width - line.length);
+    line += dynamicSpaces;
   }
-  return [];
+  return line;
 }
 
-function addOSLogoToOSInfo(info) {
-  let osLogo = getOSLogo("macOS", info.length);
-  // if (osLogo.length !== info.length) {
-  //   alert("help"); // TODO
-  // }
-  for (let i = 0; i < info.length; i++) {
-    // Overwrite the element at the current index
-    osLogo[i] = osLogo[i] + info[i];
+class OSLogos {
+  constructor(colors) {
+    this.colors = colors;
   }
-  return osLogo;
+
+  _macOS() {
+    const { green, brown, orange, purple, blue } = this.colors;
+    return [
+      green("                      ..'         "),
+      green("                  ,xNMM.          "),
+      green("                .OMMMMo           "),
+      green('                lMM"              '),
+      green("     .;loddo:.  .olloddol;.       "),
+      green("   cKMMMMMMMMMMNWMMMMMMMMMM0:     "),
+      brown(" .KMMMMMMMMMMMMMMMMMMMMMMMWd.     "),
+      brown(" XMMMMMMMMMMMMMMMMMMMMMMMX.       "),
+      orange(";MMMMMMMMMMMMMMMMMMMMMMMM:        "),
+      orange(":MMMMMMMMMMMMMMMMMMMMMMMM:        "),
+      orange(".MMMMMMMMMMMMMMMMMMMMMMMMX.       "),
+      orange(" kMMMMMMMMMMMMMMMMMMMMMMMMWd.     "),
+      purple(" 'XMMMMMMMMMMMMMMMMMMMMMMMMMMk    "),
+      purple("  'XMMMMMMMMMMMMMMMMMMMMMMMMK.    "),
+      blue("    kMMMMMMMMMMMMMMMMMMMMMMd      "),
+      blue("     ;KMMMMMMMWXXWMMMMMMMk.       "),
+      blue('       "cooc*"    "*coo\'"         '),
+      blue("                                  "),
+    ];
+  }
+
+  _unknown() {
+    const { blue } = this.colors;
+    return [
+      blue(addPadding("            .◢██████◣.   ")),
+      blue(addPadding("          .◢██▀▀░░▀▀██◣. ")),
+      blue(addPadding("         .███░  .▄▄. ░██.")),
+      blue(addPadding("         ███░  ▐████. ░██")),
+      blue(addPadding("         ▀██.  ░▀▀██▌ ◢██")),
+      blue(addPadding("          ▀██◣.   ▄█▀◢██▀")),
+      blue(addPadding("           ▀█████  ◢██▀  ")),
+      blue(addPadding("            ░▀▀▀  ◢██▀   ")),
+      blue(addPadding("                 ◢██▀    ")),
+      blue(addPadding("                ◢██▀     ")),
+      blue(addPadding("               ▐██▌      ")),
+      blue(addPadding("               ▐██▌      ")),
+      blue(addPadding("               ░▀▀░      ")),
+      blue(addPadding("                         ")),
+      blue(addPadding("               .▄▄.      ")),
+      blue(addPadding("              ▐████▌     ")),
+      blue(addPadding("              ░▀██▀░     ")),
+      blue(addPadding("                         ")),
+    ];
+  }
+
+  _getOSLogo(os, linecount) {
+    // console.log(linecount);
+    // console.log(macOSArt.length);
+
+    function padNewlines(art, linecount) {
+      let artWithMoreNewlines = art;
+      for (let i = 0; i < linecount - art.length; i++) {
+        artWithMoreNewlines.push(emptyLine);
+      }
+      return artWithMoreNewlines;
+    }
+    let art;
+    if (os === "macOS") {
+      art = this._macOS();
+    } else {
+      art = this._unknown();
+    }
+    if (linecount > art.length) {
+      return padNewlines(macOSArt, linecount);
+    } else {
+      return art;
+    }
+  }
+
+  addOSLogoToOSInfo(os, info) {
+    let osLogo = this._getOSLogo(os, info.length);
+    for (let i = 0; i < info.length; i++) {
+      osLogo[i] = osLogo[i] + info[i];
+    }
+    return osLogo;
+  }
 }

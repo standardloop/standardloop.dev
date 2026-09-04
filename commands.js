@@ -1,9 +1,10 @@
 class CommandProcessor {
-  constructor(terminal, osInfo) {
+  constructor(terminal, osInfo, osLogos) {
     this.terminal = terminal;
     this.cwdPath = []; // path segments from root; [] = home
     this.commands = this._buildCommands();
     this.osInfo = osInfo;
+    this.osLogos = osLogos;
     this.version = "v0.1.5";
   }
 
@@ -48,34 +49,38 @@ class CommandProcessor {
     }
   }
 
-  fastfetchorneofetch() {
+  printSystemInfo() {
     const t = this.terminal;
-    const { green } = t.colors;
+    const { green, brown } = t.colors;
 
     t.setIsLastError(false);
     let output = [
-      `standardloop.dev`,
+      green(`standardloop.dev`),
       `----------------`,
-      `OS: ${this.osInfo.modernHints.osName} ${this.osInfo.modernHints.osVersion} ${this.osInfo.modernHints.architecture}`,
-      `Shell: standardloopshell ${this.version}`,
-      `Theme: Starfield`,
-      `Terminal: standardloop.dev`,
-      `Terminal Font: IBM Plex Mono`,
-      `Memory: ${this.osInfo.deviceMemoryGB} GB`,
-      `CPU: ${this.osInfo.cpuCores} Cores`,
-      `TimeZone: ${this.osInfo.timeZone}`,
-      `DarkMode: ${this.osInfo.isDarkMode}`,
-      `Mobile: ${this.osInfo.modernHints.isMobile}`,
-      `Platform: ${this.osInfo.platform}`,
+      brown("OS:") +
+        ` ${this.osInfo.modernHints.osName} ${this.osInfo.modernHints.osVersion} ${this.osInfo.modernHints.architecture}`,
+      brown("Shell: ") + `standardloopshell ${this.version}`,
+      brown("Theme: ") + `Starfield`,
+      brown("Terminal: ") + `standardloop.dev`,
+      brown("Terminal Font: ") + `IBM Plex Mono`,
+      brown("Memory: ") + `${this.osInfo.deviceMemoryGB} GB`,
+      brown("CPU: ") + `${this.osInfo.cpuCores} Cores`,
+      brown("TimeZone: ") + `${this.osInfo.timeZone}`,
+      brown("DarkMode: ") + `${this.osInfo.isDarkMode}`,
+      brown("Mobile: ") + `${this.osInfo.modernHints.isMobile}`,
+      brown("Platform: ") + `${this.osInfo.platform}`,
       //`User Agent: ${this.osInfo.userAgentRaw}`,
-      `Language: ${this.osInfo.language}`,
-      `All Languages: ${this.osInfo.allLanguages}`,
+      brown("Language: ") + `${this.osInfo.language}`,
+      brown("All Languages: ") + `${this.osInfo.allLanguages}`,
       //`BrandData: ${this.osInfo.modernHints.brandData}`,
-      `Model: ${this.osInfo.modernHints.deviceModel}`,
-      `Bitness: ${this.osInfo.modernHints.bitness}`,
+      brown("Model: ") + `${this.osInfo.modernHints.deviceModel}`,
+      brown("Bitness: ") + `${this.osInfo.modernHints.bitness}`,
       //`FullVersionList: ${this.osInfo.modernHints.fullVersionList}`,
     ];
-    output = addOSLogoToOSInfo(output);
+    output = this.osLogos.addOSLogoToOSInfo(
+      this.osInfo.modernHints.osName,
+      output,
+    );
     t.printLines(output);
   }
   // ---------- Commands ----------.
@@ -85,27 +90,34 @@ class CommandProcessor {
 
     return {
       help: () => {
+        const totalDistanceBeforeDescription = 18;
+        function setupCommand(name, description) {
+          let dynamicSpaces = " ".repeat(
+            totalDistanceBeforeDescription - name.length,
+          );
+          return "  " + green(name) + dynamicSpaces + dim(description);
+        }
         t.setIsLastError(false);
         t.printLines([
           "Available commands:",
           "",
-          "  help              show this list",
-          "  docs              open my documentation website",
-          "  this              open my GitHub repo for this application",
-          "  symbol            sets the prompt symbol, default is >, takes one arg",
-          "  contact           how to reach me",
-          "  ls                list files in current directory",
-          "  cd <dir>          change directory (cd .. to go back)",
-          "  cat <file>        print a file's contents",
-          "  clear             clear the screen",
-          "  exit              close the terminal window",
-          "  shutdown          power off",
-          "  whoami",
-          "  banner",
+          setupCommand("help", "show this list"),
+          setupCommand("docs", "opens my documentation website"),
+          setupCommand("this", "opens my GitHub repo for this application"),
+          setupCommand("symbol <symbol>", "sets the prompt symbol"),
+          setupCommand("contact", "how to reach me"),
+          setupCommand("ls", "list files in current directory"),
+          setupCommand("cd <dir>", "change directory (cd .. to go back)"),
+          setupCommand("cat <file>", "print a file's contents"),
+          setupCommand("clear", "clear the screen"),
+          setupCommand("whoami", "prints my information"),
+          setupCommand("banner", "show my banner"),
+          setupCommand("fastfetch", "show system information"),
+          setupCommand("neofetch", "aliased to fastfetch"),
+          setupCommand("js", "enter javascript mode"),
+          setupCommand("exit", "closes the terminal window"),
+          setupCommand("shutdown", "power off"),
           "",
-          "Drag the title bar to move the window, or any edge/corner",
-          "to resize it. The red/yellow/green buttons close, minimize,",
-          "and maximize it.",
         ]);
       },
 
@@ -274,6 +286,7 @@ class CommandProcessor {
           "██░░░░░░░░░░░░██",
           "  ██░░░░░░░░██",
           "    ████████",
+          "                ",
         ];
         t.printLines(egg);
       },
@@ -294,10 +307,10 @@ class CommandProcessor {
         t.printLines(green(this.version));
       },
       fastfetch: () => {
-        this.fastfetchorneofetch();
+        this.printSystemInfo();
       },
       neofetch: () => {
-        this.fastfetchorneofetch();
+        this.printSystemInfo();
       },
     };
   }

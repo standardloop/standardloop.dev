@@ -10,5 +10,8 @@ function buildColors() {
     green: colorize("#46d383"),
     dim: colorize("#8b95a1"),
     red: colorize("#e0524a"),
+    brown: colorize("#ce7e00"),
+    orange: colorize("#ffa500"),
+    purple: colorize("#c90076"),
   };
 }
