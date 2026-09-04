@@ -4,6 +4,7 @@ class CommandProcessor {
     this.cwdPath = []; // path segments from root; [] = home
     this.commands = this._buildCommands();
     this.osInfo = osInfo;
+    this.version = "v0.1.5";
   }
 
   // ---------- Virtual filesystem ----------
@@ -52,16 +53,32 @@ class CommandProcessor {
     const { green } = t.colors;
 
     t.setIsLastError(false);
-    t.printLines([
+    let output = [
       `standardloop.dev`,
       `----------------`,
       `OS: ${this.osInfo.modernHints.osName} ${this.osInfo.modernHints.osVersion} ${this.osInfo.modernHints.architecture}`,
-      ``,
-    ]);
+      `Shell: standardloopshell ${this.version}`,
+      `Theme: Starfield`,
+      `Terminal: standardloop.dev`,
+      `Terminal Font: IBM Plex Mono`,
+      `Memory: ${this.osInfo.deviceMemoryGB} GB`,
+      `CPU: ${this.osInfo.cpuCores} Cores`,
+      `TimeZone: ${this.osInfo.timeZone}`,
+      `DarkMode: ${this.osInfo.isDarkMode}`,
+      `Mobile: ${this.osInfo.modernHints.isMobile}`,
+      `Platform: ${this.osInfo.platform}`,
+      //`User Agent: ${this.osInfo.userAgentRaw}`,
+      `Language: ${this.osInfo.language}`,
+      `All Languages: ${this.osInfo.allLanguages}`,
+      //`BrandData: ${this.osInfo.modernHints.brandData}`,
+      `Model: ${this.osInfo.modernHints.deviceModel}`,
+      `Bitness: ${this.osInfo.modernHints.bitness}`,
+      //`FullVersionList: ${this.osInfo.modernHints.fullVersionList}`,
+    ];
+    output = addOSLogoToOSInfo(output);
+    t.printLines(output);
   }
-  // ---------- Commands ----------
-
-  // We need to figure out how to support async here.
+  // ---------- Commands ----------.
   _buildCommands() {
     const t = this.terminal;
     const { blue, dim, red, green } = t.colors;
@@ -274,7 +291,7 @@ class CommandProcessor {
       },
       version: () => {
         t.setIsLastError(false);
-        t.printLines(green("v0.1.5"));
+        t.printLines(green(this.version));
       },
       fastfetch: () => {
         this.fastfetchorneofetch();

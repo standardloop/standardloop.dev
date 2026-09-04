@@ -1,10 +1,13 @@
 class TerminalEngine {
-  constructor({
-    promptHost = "standardloop.dev",
-    promptSymbol = "$",
-    getPromptPath,
-    onCommand,
-  } = {}) {
+  constructor(
+    {
+      promptHost = "standardloop.dev",
+      promptSymbol = "$",
+      getPromptPath,
+      onCommand,
+    } = {},
+    colors,
+  ) {
     this.promptHost = promptHost;
     this.promptSymbol = promptSymbol;
     this.isLastError = false;
@@ -23,7 +26,7 @@ class TerminalEngine {
     // with no leading blank line above it.
     this.suppressNextPromptNewline = false;
 
-    this.colors = this._buildColors();
+    this.colors = colors;
 
     this.term = new Terminal({
       cursorBlink: true,
