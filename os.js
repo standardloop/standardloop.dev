@@ -70,293 +70,273 @@ async function getParsedBrowserAndOSData() {
   return data;
 }
 
-function addPadding(line) {
-  const width = emptyLine.length;
-  if (line.length < width) {
-    let dynamicSpaces = " ".repeat(width - line.length);
-    line += dynamicSpaces;
-  }
-  return line;
-}
-
-function padNewlines(art, linecount, emptyLine) {
-  const originalArtLength = art.length;
-  let artWithMoreNewlines = art;
-  for (let i = 0; i < linecount - originalArtLength; i++) {
-    artWithMoreNewlines.push(emptyLine);
-  }
-  return artWithMoreNewlines;
-}
-
 class OSLogos {
   constructor(colors) {
     this.colors = colors;
+    this.artDatabase = this._buildArt();
+    this.artAliasMap = this._buildArtAliases();
   }
 
-  _macOS() {
-    const { green, brown, orange, purple, blue } = this.colors;
-    return [
-      green("                      ..'         "),
-      green("                  ,xNMM.          "),
-      green("                .OMMMMo           "),
-      green('                lMM"              '),
-      green("     .;loddo:.  .olloddol;.       "),
-      green("   cKMMMMMMMMMMNWMMMMMMMMMM0:     "),
-      brown(" .KMMMMMMMMMMMMMMMMMMMMMMMWd.     "),
-      brown(" XMMMMMMMMMMMMMMMMMMMMMMMX.       "),
-      orange(";MMMMMMMMMMMMMMMMMMMMMMMM:        "),
-      orange(":MMMMMMMMMMMMMMMMMMMMMMMM:        "),
-      orange(".MMMMMMMMMMMMMMMMMMMMMMMMX.       "),
-      orange(" kMMMMMMMMMMMMMMMMMMMMMMMMWd.     "),
-      purple(" 'XMMMMMMMMMMMMMMMMMMMMMMMMMMk    "),
-      purple("  'XMMMMMMMMMMMMMMMMMMMMMMMMK.    "),
-      blue("    kMMMMMMMMMMMMMMMMMMMMMMd      "),
-      blue("     ;KMMMMMMMWXXWMMMMMMMk.       "),
-      blue('       "cooc*"    "*coo\'"         '),
-      "                                  ",
-    ];
+  // TODO, do we want spaces in the keys?
+  _buildArtAliases() {
+    return {
+      macos: "macos",
+      apple: "macos",
+      ipados: "macos",
+      ios: "macos",
+
+      linux: "linux",
+
+      windows: "windows",
+      microsoft: "windows",
+
+      android: "android",
+
+      chrome: "chrome",
+      chromium: "chrome",
+      chromeos: "chrome",
+      chromiumos: "chrome",
+
+      default: "unknown",
+      unknown: "unknown",
+      fallback: "unknown",
+    };
   }
 
-  _windows() {
-    const { red, green, brown, orange, purple, blue } = this.colors;
-    return [
-      red("       ,.=:!!t3Z3z.,                    "),
-      red("      :tt:::tt333EE3                    "),
-      red("      Et:::ztt33EEEL ") + green("@Ee.,      ..,     "),
-      red("     ;tt:::tt333EE7 ") + green(";EEEEEEttttt33#     "),
-      red("    :Et:::zt333EEQ. ") + green("$EEEEEttttt33QL     "),
-      red("    it::::tt333EEF ") + green("@EEEEEEttttt33F      "),
-      red('   ;3=*^```"*4EEV ') + green(":EEEEEEttttt33@.      "),
-      blue("   ,.=::::!t=., ") + red("` ") + green("@EEEEEEtttz33QF       "),
-      blue("   ;::::::::zt33)  ") + green('"4EEEtttji3P*        '),
-      blue("  :t::::::::tt33.") +
-        brown(":Z3z..  ") +
-        green("``") +
-        brown(" ,..g.       "),
-      blue("  i::::::::zt33F ") + brown("AEEEtttt::::ztF        "),
-      blue(" ;:::::::::t33V ") + brown(";EEEttttt::::t3         "),
-      blue(" E::::::::zt33L ") + brown("@EEEtttt::::z3F         "),
-      blue('{3=*^```"*4E3) ') + brown(";EEEtttt:::::tZ`         "),
-      blue("             `") + " " + brown(":EEEEtttt::::z7          "),
-      brown('                 "VEzjt:;;z>*`          '),
-      "                                        ",
-    ];
+  _buildArt() {
+    const { dim, red, green, brown, orange, purple, blue } = this.colors;
+    return {
+      macos: {
+        art: [
+          green("                      ..'         "),
+          green("                  ,xNMM.          "),
+          green("                .OMMMMo           "),
+          green('                lMM"              '),
+          green("     .;loddo:.  .olloddol;.       "),
+          green("   cKMMMMMMMMMMNWMMMMMMMMMM0:     "),
+          brown(" .KMMMMMMMMMMMMMMMMMMMMMMMWd.     "),
+          brown(" XMMMMMMMMMMMMMMMMMMMMMMMX.       "),
+          orange(";MMMMMMMMMMMMMMMMMMMMMMMM:        "),
+          orange(":MMMMMMMMMMMMMMMMMMMMMMMM:        "),
+          orange(".MMMMMMMMMMMMMMMMMMMMMMMMX.       "),
+          orange(" kMMMMMMMMMMMMMMMMMMMMMMMMWd.     "),
+          purple(" 'XMMMMMMMMMMMMMMMMMMMMMMMMMMk    "),
+          purple("  'XMMMMMMMMMMMMMMMMMMMMMMMMK.    "),
+          blue("    kMMMMMMMMMMMMMMMMMMMMMMd      "),
+          blue("     ;KMMMMMMMWXXWMMMMMMMk.       "),
+          blue('       "cooc*"    "*coo\'"         '),
+          "                                  ",
+        ],
+        color: this.colors.brown,
+      },
+      windows: {
+        art: [
+          red("       ,.=:!!t3Z3z.,                    "),
+          red("      :tt:::tt333EE3                    "),
+          red("      Et:::ztt33EEEL ") + green("@Ee.,      ..,     "),
+          red("     ;tt:::tt333EE7 ") + green(";EEEEEEttttt33#     "),
+          red("    :Et:::zt333EEQ. ") + green("$EEEEEttttt33QL     "),
+          red("    it::::tt333EEF ") + green("@EEEEEEttttt33F      "),
+          red('   ;3=*^```"*4EEV ') + green(":EEEEEEttttt33@.      "),
+          blue("   ,.=::::!t=., ") +
+            red("` ") +
+            green("@EEEEEEtttz33QF       "),
+          blue("   ;::::::::zt33)  ") + green('"4EEEtttji3P*        '),
+          blue("  :t::::::::tt33.") +
+            brown(":Z3z..  ") +
+            green("``") +
+            brown(" ,..g.       "),
+          blue("  i::::::::zt33F ") + brown("AEEEtttt::::ztF        "),
+          blue(" ;:::::::::t33V ") + brown(";EEEttttt::::t3         "),
+          blue(" E::::::::zt33L ") + brown("@EEEtttt::::z3F         "),
+          blue('{3=*^```"*4E3) ') + brown(";EEEtttt:::::tZ`         "),
+          blue("             `") + " " + brown(":EEEEtttt::::z7          "),
+          brown('                 "VEzjt:;;z>*`          '),
+          "                                        ",
+        ],
+        color: this.colors.blue,
+      },
+      android: {
+        art: [
+          green("         -o          o-             "),
+          green("          +hydNNNNdyh+              "),
+          green("        +mMMMMMMMMMMMMm+            "),
+          green("      `dMM") +
+            "m:" +
+            green("NMMMMMMN") +
+            ":m" +
+            green("MMd`          "),
+          green("      hMMMMMMMMMMMMMMMMMMh          "),
+          green("  ..  yyyyyyyyyyyyyyyyyyyy  ..      "),
+          green(".mMMm`MMMMMMMMMMMMMMMMMMMM`mMMm.    "),
+          green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
+          green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
+          green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
+          green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
+          green("-MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM-    "),
+          green(" +yy+ MMMMMMMMMMMMMMMMMMMM +yy+     "),
+          green("      mMMMMMMMMMMMMMMMMMMm          "),
+          green("      `/++MMMMh++hMMMM++/`          "),
+          green("          MMMMo  oMMMM              "),
+          green("          MMMMo  oMMMM              "),
+          green("          oNMm-  -mMNs              "),
+          "                                    ",
+        ],
+        color: this.colors.green,
+      },
+      linux: {
+        art: [
+          dim("        #####          "),
+          dim("       #######         "),
+          dim("       ##") + "O" + dim("#") + "O" + dim("##         "),
+          "       " + dim("#") + orange("#####") + dim("#") + "         ",
+          "     " +
+            dim("##") +
+            "##" +
+            orange("###") +
+            "###" +
+            dim("#") +
+            "       ",
+          "    " + dim("#") + "##########" + dim("##") + "      ",
+          "   " + dim("#") + "############" + dim("##") + "     ",
+          "   " + dim("#") + "############" + dim("###") + "    ",
+          "  " +
+            orange("##") +
+            dim("#") +
+            "###########" +
+            dim("##") +
+            orange("#") +
+            "    ",
+          orange("######") +
+            dim("#") +
+            "#######" +
+            dim("#") +
+            orange("#####") +
+            "   ",
+          orange("#######") +
+            dim("#") +
+            "#####" +
+            dim("#") +
+            orange("######") +
+            "   ",
+          "  " + orange("#####") + dim("######") + orange("######") + "    ",
+          "                       ",
+        ],
+        color: this.colors.orange,
+      },
+      chrome: {
+        art: [
+          red("            .,:loool:,.               "),
+          red("        .,coooooooooooooc,.           "),
+          red("     .,lllllllllllllllllllll,.        "),
+          red("    ;ccccccccccccccccccccccccc;       "),
+          green("  '") + red("ccccccccccccccccccccccccccccc.     "),
+          green(" ,oo") +
+            red("c::::::::okO") +
+            "000" +
+            brown("0OOkkkkkkkkkkk:    "),
+          green(".ooool") +
+            red(";;;;:x") +
+            "K0k" +
+            blue("xxxxxk") +
+            "0X" +
+            brown("K0000000000.   "),
+          green(":oooool") +
+            red(";,;O") +
+            "K" +
+            blue("ddddddddddd") +
+            "KX" +
+            brown("000000000d   "),
+          green("lllllool") +
+            red(";l") +
+            "N" +
+            blue("dllllllllllld") +
+            "N" +
+            brown("K000000000   "),
+          green("lllllllll") +
+            red("o") +
+            "M" +
+            blue("dccccccccccco") +
+            "W" +
+            brown("K000000000   "),
+          green(";cllllllllX") +
+            "X" +
+            blue("c:::::::::c") +
+            "0X" +
+            brown("000000000d   "),
+          green(".ccccllllllO") +
+            "Nk" +
+            blue("c;,,,;cx") +
+            "KK" +
+            brown("0000000000.   "),
+          green(" .cccccclllllxOO") +
+            "OOO" +
+            green("Okx") +
+            brown("O0000000000;    "),
+          green("  .:ccccccccllllllllo") + brown("O0000000OOO,     "),
+          green("    ,:ccccccccclllcd") + brown("0000OOOOOOl.      "),
+          green("      '::ccccccccc") + brown("dOOOOOOOkx:.        "),
+          green("        ..,::cccc") + brown("xOOOkkko;.           "),
+          green("            ..,:") + brown("dOkxl:.               "),
+          "                                      ",
+        ],
+        color: this.colors.green,
+      },
+      unknown: {
+        art: [
+          blue("           .◢██████◣.           "),
+          blue("         .◢██▀▀░░▀▀██◣.         "),
+          blue("        .███░  .▄▄. ░██.        "),
+          blue("        ███░  ▐████. ░██        "),
+          blue("        ▀██.  ░▀▀██▌ ◢██        "),
+          blue("         ▀██◣.   ▄█▀◢██▀        "),
+          blue("          ▀█████  ◢██▀          "),
+          blue("           ░▀▀▀  ◢██▀           "),
+          blue("                ◢██▀            "),
+          blue("               ◢██▀             "),
+          blue("              ▐██▌              "),
+          blue("              ▐██▌              "),
+          blue("              ░▀▀░              "),
+          blue("                                "),
+          blue("              .▄▄.              "),
+          blue("             ▐████▌             "),
+          blue("             ░▀██▀░             "),
+          "                                ",
+        ],
+        color: this.colors.blue,
+      },
+      fastfetch: {
+        art: [
+          "Fastfetch:                 ",
+          "╭───────────────────────╮  ",
+          "│  ● ● ●    FASTFETCH   │  ",
+          "├───────────────────────┤  ",
+          "│                       │  ",
+          "│    /\      ►►►►►►►    │  ",
+          "│   /--\     ►►►►►►     │  ",
+          "│  /----\    ►►►►►      │  ",
+          "│   |xx|     ►►►►       │  ",
+          "│   |xx|     ►►►        │  ",
+          "│   ^^^^                │  ",
+          "╰───────────────────────╯  ",
+          "╰───────────────────────╯  ",
+          "                           ",
+        ],
+        color: this.colors.blue,
+      },
+    };
   }
 
-  _android() {
-    const { green } = this.colors;
-    return [
-      green("         -o          o-             "),
-      green("          +hydNNNNdyh+              "),
-      green("        +mMMMMMMMMMMMMm+            "),
-      green("      `dMM") +
-        "m:" +
-        green("NMMMMMMN") +
-        ":m" +
-        green("MMd`          "),
-      green("      hMMMMMMMMMMMMMMMMMMh          "),
-      green("  ..  yyyyyyyyyyyyyyyyyyyy  ..      "),
-      green(".mMMm`MMMMMMMMMMMMMMMMMMMM`mMMm.    "),
-      green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
-      green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
-      green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
-      green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
-      green("-MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM-    "),
-      green(" +yy+ MMMMMMMMMMMMMMMMMMMM +yy+     "),
-      green("      mMMMMMMMMMMMMMMMMMMm          "),
-      green("      `/++MMMMh++hMMMM++/`          "),
-      green("          MMMMo  oMMMM              "),
-      green("          MMMMo  oMMMM              "),
-      green("          oNMm-  -mMNs              "),
-      "                                    ",
-    ];
+  _findArt(os) {
+    const normalizedKey = os.trim().toLowerCase();
+    const canonicalKey = this.artAliasMap[normalizedKey];
+    let osArtAndColor = this.artDatabase[canonicalKey]
+      ? this.artDatabase[canonicalKey]
+      : this.artDatabase["unknown"];
+    return osArtAndColor;
   }
 
-  _linux() {
-    const { orange, dim } = this.colors;
-    return [
-      dim("        #####          "),
-      dim("       #######         "),
-      dim("       ##") + "O" + dim("#") + "O" + dim("##         "),
-      "       " + dim("#") + orange("#####") + dim("#") + "         ",
-      "     " + dim("##") + "##" + orange("###") + "###" + dim("#") + "       ",
-      "    " + dim("#") + "##########" + dim("##") + "      ",
-      "   " + dim("#") + "############" + dim("##") + "     ",
-      "   " + dim("#") + "############" + dim("###") + "    ",
-      "  " +
-        orange("##") +
-        dim("#") +
-        "###########" +
-        dim("##") +
-        orange("#") +
-        "    ",
-      orange("######") +
-        dim("#") +
-        "#######" +
-        dim("#") +
-        orange("#####") +
-        "   ",
-      orange("#######") +
-        dim("#") +
-        "#####" +
-        dim("#") +
-        orange("######") +
-        "   ",
-      "  " + orange("#####") + dim("######") + orange("######") + "    ",
-      "                       ",
-    ];
-  }
-
-  _chromeOS() {
-    const { green, red, blue, brown } = this.colors;
-    return [
-      red("            .,:loool:,.               "),
-      red("        .,coooooooooooooc,.           "),
-      red("     .,lllllllllllllllllllll,.        "),
-      red("    ;ccccccccccccccccccccccccc;       "),
-      green("  '") + red("ccccccccccccccccccccccccccccc.     "),
-      green(" ,oo") +
-        red("c::::::::okO") +
-        "000" +
-        brown("0OOkkkkkkkkkkk:    "),
-      green(".ooool") +
-        red(";;;;:x") +
-        "K0k" +
-        blue("xxxxxk") +
-        "0X" +
-        brown("K0000000000.   "),
-      green(":oooool") +
-        red(";,;O") +
-        "K" +
-        blue("ddddddddddd") +
-        "KX" +
-        brown("000000000d   "),
-      green("lllllool") +
-        red(";l") +
-        "N" +
-        blue("dllllllllllld") +
-        "N" +
-        brown("K000000000   "),
-      green("lllllllll") +
-        red("o") +
-        "M" +
-        blue("dccccccccccco") +
-        "W" +
-        brown("K000000000   "),
-      green(";cllllllllX") +
-        "X" +
-        blue("c:::::::::c") +
-        "0X" +
-        brown("000000000d   "),
-      green(".ccccllllllO") +
-        "Nk" +
-        blue("c;,,,;cx") +
-        "KK" +
-        brown("0000000000.   "),
-      green(" .cccccclllllxOO") +
-        "OOO" +
-        green("Okx") +
-        brown("O0000000000;    "),
-      green("  .:ccccccccllllllllo") + brown("O0000000OOO,     "),
-      green("    ,:ccccccccclllcd") + brown("0000OOOOOOl.      "),
-      green("      '::ccccccccc") + brown("dOOOOOOOkx:.        "),
-      green("        ..,::cccc") + brown("xOOOkkko;.           "),
-      green("            ..,:") + brown("dOkxl:.               "),
-      "                                      ",
-    ];
-  }
-
-  _unknown() {
-    const { blue } = this.colors;
-    return [
-      blue("           .◢██████◣.           "),
-      blue("         .◢██▀▀░░▀▀██◣.         "),
-      blue("        .███░  .▄▄. ░██.        "),
-      blue("        ███░  ▐████. ░██        "),
-      blue("        ▀██.  ░▀▀██▌ ◢██        "),
-      blue("         ▀██◣.   ▄█▀◢██▀        "),
-      blue("          ▀█████  ◢██▀          "),
-      blue("           ░▀▀▀  ◢██▀           "),
-      blue("                ◢██▀            "),
-      blue("               ◢██▀             "),
-      blue("              ▐██▌              "),
-      blue("              ▐██▌              "),
-      blue("              ░▀▀░              "),
-      blue("                                "),
-      blue("              .▄▄.              "),
-      blue("             ▐████▌             "),
-      blue("             ░▀██▀░             "),
-      "                                ",
-    ];
-  }
-
-  getColorForOS(os) {
-    os = os.toLowerCase();
-    switch (os) {
-      case "ipados":
-      case "ios":
-      case "macos":
-        return this.colors.brown;
-      case "linux":
-        return this.colors.orange;
-        break;
-      case "windows":
-        return this.colors.blue;
-        break;
-      case "android":
-        return this.colors.green;
-      case "chromium":
-      case "chrome":
-      case "chromium os":
-      case "chrome os":
-        return this.colors.green;
-      default:
-        return this.colors.blue;
-    }
-  }
-  _getOSLogo(os, linecount) {
-    os = os.toLowerCase();
-
-    let art;
-    switch (os) {
-      case "ipados":
-      case "ios":
-      case "macos":
-        art = this._macOS();
-        break;
-      case "linux":
-        art = this._linux();
-        break;
-      case "windows":
-        art = this._windows();
-        break;
-      case "android":
-        art = this._android();
-        break;
-      case "chromium":
-      case "chrome":
-      case "chromium os":
-      case "chrome os":
-        art = this._chromeOS();
-        break;
-      default:
-        art = this._unknown();
-    }
-
-    const emptyLineLength = art.at(-1).length; // every art last is an empty line
-    const emptyLine = " ".repeat(emptyLineLength);
-
-    if (linecount > art.length) {
-      art = padNewlines(art, linecount, emptyLine);
-    }
-    return art;
-  }
-
-  addOSLogoToOSInfo(os, info) {
-    let osLogo = this._getOSLogo(os, info.length);
-    for (let i = 0; i < info.length; i++) {
-      osLogo[i] = osLogo[i] + info[i];
-    }
-    return osLogo;
+  getOSArtAndColor(os) {
+    return this._findArt(os);
   }
 }

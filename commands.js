@@ -1,3 +1,12 @@
+function padNewlines(art, linecount, emptyLine) {
+  const originalArtLength = art.length;
+  let artWithMoreNewlines = art;
+  for (let i = 0; i < linecount - originalArtLength; i++) {
+    artWithMoreNewlines.push(emptyLine);
+  }
+  return artWithMoreNewlines;
+}
+
 class CommandProcessor {
   constructor(terminal, osInfo, osLogos, version) {
     this.terminal = terminal;
@@ -34,7 +43,7 @@ class CommandProcessor {
 
   // ---------- Running a command ----------
 
-  async run(raw) {
+  run(raw) {
     const trimmed = raw.trim();
     if (!trimmed) return;
     const [cmd, ...args] = trimmed.split(/\s+/);
@@ -53,10 +62,13 @@ class CommandProcessor {
     const t = this.terminal;
     const { green } = t.colors;
 
-    const colorFunction = this.osLogos.getColorForOS(os);
+    const { art: osArt, color: colorFunction } =
+      this.osLogos.getOSArtAndColor(os);
+
+    console.log(osArt[0].length);
 
     t.setIsLastError(false);
-    let output = [
+    let systemInfo = [
       green(`standardloop`) + `.` + green(`dev`),
       `----------------`,
       colorFunction("OS:") +
@@ -79,8 +91,19 @@ class CommandProcessor {
       colorFunction("Bitness: ") + `${this.osInfo.modernHints.bitness}`,
       //`FullVersionList: ${this.osInfo.modernHints.fullVersionList}`,
     ];
-    output = this.osLogos.addOSLogoToOSInfo(os, output);
-    t.printLines(output);
+
+    const emptyLineLength = osArt.at(-1).length; // every art last line is an empty line
+    const emptyLine = " ".repeat(emptyLineLength);
+
+    let combindedOutput =
+      systemInfo.length > osArt.length
+        ? padNewlines(osArt, systemInfo.length, emptyLine)
+        : osArt;
+
+    for (let i = 0; i < systemInfo.length; i++) {
+      combindedOutput[i] = combindedOutput[i] + systemInfo[i];
+    }
+    t.printLines(combindedOutput);
   }
   // ---------- Commands ----------.
   _buildCommands() {
