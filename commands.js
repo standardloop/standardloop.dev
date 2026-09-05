@@ -51,30 +51,32 @@ class CommandProcessor {
 
   printSystemInfo(os) {
     const t = this.terminal;
-    const { green, brown } = t.colors;
+    const { green } = t.colors;
+
+    const colorFunction = this.osLogos.getColorForOS(os);
 
     t.setIsLastError(false);
     let output = [
-      green(`standardloop.dev`),
+      green(`standardloop`) + `.` + green(`dev`),
       `----------------`,
-      brown("OS:") +
+      colorFunction("OS:") +
         ` ${this.osInfo.modernHints.osName} ${this.osInfo.modernHints.osVersion} ${this.osInfo.modernHints.architecture}`,
-      brown("Shell: ") + `standardloopshell ${this.version}`,
-      brown("Theme: ") + `Starfield`,
-      brown("Terminal: ") + `standardloop.dev`,
-      brown("Terminal Font: ") + `IBM Plex Mono`,
-      brown("Memory: ") + `${this.osInfo.deviceMemoryGB} GB`,
-      brown("CPU: ") + `${this.osInfo.cpuCores} Cores`,
-      brown("TimeZone: ") + `${this.osInfo.timeZone}`,
-      brown("DarkMode: ") + `${this.osInfo.isDarkMode}`,
-      brown("Mobile: ") + `${this.osInfo.modernHints.isMobile}`,
-      brown("Platform: ") + `${this.osInfo.platform}`,
+      colorFunction("Shell: ") + `standardloopshell ${this.version}`,
+      colorFunction("Theme: ") + `Starfield`,
+      colorFunction("Terminal: ") + `standardloop.dev`,
+      colorFunction("Terminal Font: ") + `IBM Plex Mono`,
+      colorFunction("Memory: ") + `${this.osInfo.deviceMemoryGB} GB`,
+      colorFunction("CPU: ") + `${this.osInfo.cpuCores} Cores`,
+      colorFunction("TimeZone: ") + `${this.osInfo.timeZone}`,
+      colorFunction("DarkMode: ") + `${this.osInfo.isDarkMode}`,
+      colorFunction("Mobile: ") + `${this.osInfo.modernHints.isMobile}`,
+      colorFunction("Platform: ") + `${this.osInfo.platform}`,
       //`User Agent: ${this.osInfo.userAgentRaw}`,
-      brown("Language: ") + `${this.osInfo.language}`,
-      brown("All Languages: ") + `${this.osInfo.allLanguages}`,
+      colorFunction("Language: ") + `${this.osInfo.language}`,
+      colorFunction("All Languages: ") + `${this.osInfo.allLanguages}`,
       //`BrandData: ${this.osInfo.modernHints.brandData}`,
-      brown("Model: ") + `${this.osInfo.modernHints.deviceModel}`,
-      brown("Bitness: ") + `${this.osInfo.modernHints.bitness}`,
+      colorFunction("Model: ") + `${this.osInfo.modernHints.deviceModel}`,
+      colorFunction("Bitness: ") + `${this.osInfo.modernHints.bitness}`,
       //`FullVersionList: ${this.osInfo.modernHints.fullVersionList}`,
     ];
     output = this.osLogos.addOSLogoToOSInfo(os, output);

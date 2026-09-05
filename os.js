@@ -118,46 +118,57 @@ class OSLogos {
   }
 
   _windows() {
+    const { red, green, brown, orange, purple, blue } = this.colors;
     return [
-      ",.=:!!t3Z3z.,",
-      ":tt:::tt333EE3",
-      "Et:::ztt33EEEL @Ee.,      ..,",
-      ";tt:::tt333EE7 ;EEEEEEttttt33#",
-      ":Et:::zt333EEQ. $EEEEEttttt33QL",
-      "it::::tt333EEF @EEEEEEttttt33F",
-      ';3=*^```"*4EEV :EEEEEEttttt33@.',
-      ",.=::::!t=., ` @EEEEEEtttz33QF",
-      ';::::::::zt33)   "4EEEtttji3P*',
-      ":t::::::::tt33.:Z3z..  `` ,..g.",
-      "i::::::::zt33F AEEEtttt::::ztF",
-      ";:::::::::t33V ;EEEttttt::::t3",
-      "E::::::::zt33L @EEEtttt::::z3F",
-      '{3=*^```"*4E3) ;EEEtttt:::::tZ`',
-      "` :EEEEtttt::::z7",
-      "VEzjt:;;z>*`",
+      red("       ,.=:!!t3Z3z.,                    "),
+      red("      :tt:::tt333EE3                    "),
+      red("      Et:::ztt33EEEL ") + green("@Ee.,      ..,     "),
+      red("     ;tt:::tt333EE7 ") + green(";EEEEEEttttt33#     "),
+      red("    :Et:::zt333EEQ. ") + green("$EEEEEttttt33QL     "),
+      red("    it::::tt333EEF ") + green("@EEEEEEttttt33F      "),
+      red('   ;3=*^```"*4EEV ') + green(":EEEEEEttttt33@.      "),
+      blue("   ,.=::::!t=., ") + red("` ") + green("@EEEEEEtttz33QF       "),
+      blue("   ;::::::::zt33)  ") + green('"4EEEtttji3P*        '),
+      blue("  :t::::::::tt33.") +
+        brown(":Z3z..  ") +
+        green("``") +
+        brown(" ,..g.       "),
+      blue("  i::::::::zt33F ") + brown("AEEEtttt::::ztF        "),
+      blue(" ;:::::::::t33V ") + brown(";EEEttttt::::t3         "),
+      blue(" E::::::::zt33L ") + brown("@EEEtttt::::z3F         "),
+      blue('{3=*^```"*4E3) ') + brown(";EEEtttt:::::tZ`         "),
+      blue("             `") + " " + brown(":EEEEtttt::::z7          "),
+      brown('                 "VEzjt:;;z>*`          '),
+      "                                        ",
     ];
   }
 
   _android() {
+    const { green } = this.colors;
     return [
-      "-o          o-",
-      "+hydNNNNdyh+",
-      "+mMMMMMMMMMMMMm+",
-      "`dMMm:NMMMMMMN:mMMd`",
-      "hMMMMMMMMMMMMMMMMMMh",
-      "..  yyyyyyyyyyyyyyyyyyyy  ..",
-      ".mMMm`MMMMMMMMMMMMMMMMMMMM`mMMm.",
-      ":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:",
-      ":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:",
-      ":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:",
-      ":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:",
-      "-MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM-",
-      "+yy+ MMMMMMMMMMMMMMMMMMMM +yy+",
-      "mMMMMMMMMMMMMMMMMMMm",
-      "`/++MMMMh++hMMMM++/`",
-      "MMMMo  oMMMM",
-      "MMMMo  oMMMM",
-      "oNMm-  -mMNs",
+      green("         -o          o-             "),
+      green("          +hydNNNNdyh+              "),
+      green("        +mMMMMMMMMMMMMm+            "),
+      green("      `dMM") +
+        "m:" +
+        green("NMMMMMMN") +
+        ":m" +
+        green("MMd`          "),
+      green("      hMMMMMMMMMMMMMMMMMMh          "),
+      green("  ..  yyyyyyyyyyyyyyyyyyyy  ..      "),
+      green(".mMMm`MMMMMMMMMMMMMMMMMMMM`mMMm.    "),
+      green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
+      green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
+      green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
+      green(":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:    "),
+      green("-MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM-    "),
+      green(" +yy+ MMMMMMMMMMMMMMMMMMMM +yy+     "),
+      green("      mMMMMMMMMMMMMMMMMMMm          "),
+      green("      `/++MMMMh++hMMMM++/`          "),
+      green("          MMMMo  oMMMM              "),
+      green("          MMMMo  oMMMM              "),
+      green("          oNMm-  -mMNs              "),
+      "                                    ",
     ];
   }
 
@@ -243,6 +254,30 @@ class OSLogos {
     ];
   }
 
+  getColorForOS(os) {
+    os = os.toLowerCase();
+    switch (os) {
+      case "ipados":
+      case "ios":
+      case "macos":
+        return this.colors.brown;
+      case "linux":
+        return this.colors.orange;
+        break;
+      case "windows":
+        return this.colors.blue;
+        break;
+      case "android":
+        return this.colors.green;
+      case "chromium":
+      case "chrome":
+      case "chromium os":
+      case "chrome os":
+        return this.colors.blue;
+      default:
+        return this.colors.blue;
+    }
+  }
   _getOSLogo(os, linecount) {
     os = os.toLowerCase();
 
