@@ -7,12 +7,11 @@ function buildColors() {
   const colorize = (hex) => (s) => `\x1b[38;2;${rgbParts(hex)}m${s}\x1b[0m`;
   return {
     blue: colorize("#4fa8ff"),
-    green: colorize("#46d383"),
+    green: colorize("#31cc76"),
     dim: colorize("#8b95a1"),
     red: colorize("#e0524a"),
     brown: colorize("#ce7e00"),
     orange: colorize("#ffa500"),
     purple: colorize("#c90076"),
-    white: colorize("#ffffff"),
   };
 }
