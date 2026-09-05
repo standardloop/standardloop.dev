@@ -70,16 +70,29 @@ async function getParsedBrowserAndOSData() {
   return data;
 }
 
+function padNewlines(art, linecount, emptyLine) {
+  const originalArtLength = art.length;
+  let artWithMoreNewlines = structuredClone(art);
+  for (let i = 0; i < linecount - originalArtLength; i++) {
+    artWithMoreNewlines.push(emptyLine);
+  }
+  return artWithMoreNewlines;
+}
+
 class OSLogos {
-  constructor(colors) {
+  #artDatabase;
+  #artAliasMap;
+  #osInfo;
+  constructor(colors, osInfo) {
     this.colors = colors;
-    this.artDatabase = this._buildArt();
-    this.artAliasMap = this._buildArtAliases();
+    this.#buildArt();
+    this.#buildArtAliases();
+    this.#osInfo = osInfo;
   }
 
   // TODO, do we want spaces in the keys?
-  _buildArtAliases() {
-    return {
+  #buildArtAliases() {
+    this.#artAliasMap = {
       macos: "macos",
       apple: "macos",
       ipados: "macos",
@@ -103,9 +116,10 @@ class OSLogos {
     };
   }
 
-  _buildArt() {
+  // should we switch to map?
+  #buildArt() {
     const { dim, red, green, brown, orange, purple, blue } = this.colors;
-    return {
+    this.#artDatabase = {
       macos: {
         art: [
           green("                      ..'         "),
@@ -327,16 +341,59 @@ class OSLogos {
     };
   }
 
-  _findArt(os) {
+  #findArt(os) {
     const normalizedKey = os.trim().toLowerCase();
-    const canonicalKey = this.artAliasMap[normalizedKey];
-    let osArtAndColor = this.artDatabase[canonicalKey]
-      ? this.artDatabase[canonicalKey]
-      : this.artDatabase["unknown"];
-    return osArtAndColor;
+    const canonicalKey = this.#artAliasMap[normalizedKey];
+    return this.#artDatabase[canonicalKey] || this.#artDatabase["unknown"];
   }
 
   getOSArtAndColor(os) {
-    return this._findArt(os);
+    return this.#findArt(os);
+  }
+
+  // TODO, should we just calcuate all at runtime?
+  // instead of dynamically building this?
+  getSystemInfo(os) {
+    const { green } = this.colors;
+    if (!os) {
+      os = this.#osInfo.modernHints.osName;
+    }
+    const { art: osArt, color: colorFunction } = this.getOSArtAndColor(os);
+    let systemInfo = [
+      green(`standardloop`) + `.` + green(`dev`),
+      `----------------`,
+      colorFunction("OS:") +
+        ` ${this.#osInfo.modernHints.osName} ${this.#osInfo.modernHints.osVersion} ${this.#osInfo.modernHints.architecture}`,
+      colorFunction("Shell: ") + `standardloopshell ${this.version}`,
+      colorFunction("Theme: ") + `Starfield`,
+      colorFunction("Terminal: ") + `standardloop.dev`,
+      colorFunction("Terminal Font: ") + `IBM Plex Mono`,
+      colorFunction("Memory: ") + `${this.#osInfo.deviceMemoryGB} GB`,
+      colorFunction("CPU: ") + `${this.#osInfo.cpuCores} Cores`,
+      colorFunction("TimeZone: ") + `${this.#osInfo.timeZone}`,
+      colorFunction("DarkMode: ") + `${this.#osInfo.isDarkMode}`,
+      colorFunction("Mobile: ") + `${this.#osInfo.modernHints.isMobile}`,
+      colorFunction("Platform: ") + `${this.#osInfo.platform}`,
+      //`User Agent: ${this.#osInfo.userAgentRaw}`,
+      colorFunction("Language: ") + `${this.#osInfo.language}`,
+      colorFunction("All Languages: ") + `${this.#osInfo.allLanguages}`,
+      //`BrandData: ${this.#osInfo.modernHints.brandData}`,
+      colorFunction("Model: ") + `${this.#osInfo.modernHints.deviceModel}`,
+      colorFunction("Bitness: ") + `${this.#osInfo.modernHints.bitness}`,
+      //`FullVersionList: ${this.#osInfo.modernHints.fullVersionList}`,
+    ];
+
+    const emptyLineLength = osArt.at(-1).length; // every art last line is an empty line
+    const emptyLine = " ".repeat(emptyLineLength);
+
+    let combindedOutput =
+      systemInfo.length > osArt.length
+        ? padNewlines(osArt, systemInfo.length, emptyLine)
+        : structuredClone(osArt);
+
+    for (let i = 0; i < systemInfo.length; i++) {
+      combindedOutput[i] = combindedOutput[i] + systemInfo[i];
+    }
+    return combindedOutput;
   }
 }

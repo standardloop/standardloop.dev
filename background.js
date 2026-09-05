@@ -1,3 +1,5 @@
+"use strict";
+
 class Background {
   constructor(layers) {
     this.reduceMotion = window.matchMedia(

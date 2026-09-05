@@ -1,18 +1,10 @@
-function padNewlines(art, linecount, emptyLine) {
-  const originalArtLength = art.length;
-  let artWithMoreNewlines = art;
-  for (let i = 0; i < linecount - originalArtLength; i++) {
-    artWithMoreNewlines.push(emptyLine);
-  }
-  return artWithMoreNewlines;
-}
+"use strict";
 
 class CommandProcessor {
-  constructor(terminal, osInfo, osLogos, version) {
+  constructor(terminal, osLogos, version) {
     this.terminal = terminal;
     this.cwdPath = []; // path segments from root; [] = home
     this.commands = this._buildCommands();
-    this.osInfo = osInfo;
     this.osLogos = osLogos;
     this.version = version;
   }
@@ -56,54 +48,6 @@ class CommandProcessor {
         red(`command not found: ${cmd}`) + `  ${dim("(try 'help')")}`,
       );
     }
-  }
-
-  printSystemInfo(os) {
-    const t = this.terminal;
-    const { green } = t.colors;
-
-    const { art: osArt, color: colorFunction } =
-      this.osLogos.getOSArtAndColor(os);
-
-    console.log(osArt[0].length);
-
-    t.setIsLastError(false);
-    let systemInfo = [
-      green(`standardloop`) + `.` + green(`dev`),
-      `----------------`,
-      colorFunction("OS:") +
-        ` ${this.osInfo.modernHints.osName} ${this.osInfo.modernHints.osVersion} ${this.osInfo.modernHints.architecture}`,
-      colorFunction("Shell: ") + `standardloopshell ${this.version}`,
-      colorFunction("Theme: ") + `Starfield`,
-      colorFunction("Terminal: ") + `standardloop.dev`,
-      colorFunction("Terminal Font: ") + `IBM Plex Mono`,
-      colorFunction("Memory: ") + `${this.osInfo.deviceMemoryGB} GB`,
-      colorFunction("CPU: ") + `${this.osInfo.cpuCores} Cores`,
-      colorFunction("TimeZone: ") + `${this.osInfo.timeZone}`,
-      colorFunction("DarkMode: ") + `${this.osInfo.isDarkMode}`,
-      colorFunction("Mobile: ") + `${this.osInfo.modernHints.isMobile}`,
-      colorFunction("Platform: ") + `${this.osInfo.platform}`,
-      //`User Agent: ${this.osInfo.userAgentRaw}`,
-      colorFunction("Language: ") + `${this.osInfo.language}`,
-      colorFunction("All Languages: ") + `${this.osInfo.allLanguages}`,
-      //`BrandData: ${this.osInfo.modernHints.brandData}`,
-      colorFunction("Model: ") + `${this.osInfo.modernHints.deviceModel}`,
-      colorFunction("Bitness: ") + `${this.osInfo.modernHints.bitness}`,
-      //`FullVersionList: ${this.osInfo.modernHints.fullVersionList}`,
-    ];
-
-    const emptyLineLength = osArt.at(-1).length; // every art last line is an empty line
-    const emptyLine = " ".repeat(emptyLineLength);
-
-    let combindedOutput =
-      systemInfo.length > osArt.length
-        ? padNewlines(osArt, systemInfo.length, emptyLine)
-        : osArt;
-
-    for (let i = 0; i < systemInfo.length; i++) {
-      combindedOutput[i] = combindedOutput[i] + systemInfo[i];
-    }
-    t.printLines(combindedOutput);
   }
   // ---------- Commands ----------.
   _buildCommands() {
@@ -327,10 +271,9 @@ class CommandProcessor {
       },
       fastfetch: (args) => {
         let os = args[0];
-        if (!os) {
-          os = this.osInfo.modernHints.osName;
-        }
-        this.printSystemInfo(os);
+        const systemInfo = this.osLogos.getSystemInfo(os);
+        t.setIsLastError(false);
+        t.printLines(systemInfo);
       },
     };
   }

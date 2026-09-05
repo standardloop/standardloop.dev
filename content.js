@@ -1,3 +1,5 @@
+"use strict";
+
 const PORTFOLIO = {
   name: "standardloop",
   role: "Site Reliability Engineer",

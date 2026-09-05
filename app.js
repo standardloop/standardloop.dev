@@ -12,8 +12,9 @@ window.addEventListener("DOMContentLoaded", async () => {
   let commands;
 
   const colors = buildColors();
-  const osLogos = new OSLogos(colors);
   const osInfo = await getParsedBrowserAndOSData();
+
+  const osLogos = new OSLogos(colors, osInfo);
 
   const terminal = new TerminalEngine(
     {
@@ -23,7 +24,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     colors,
   );
 
-  commands = new CommandProcessor(terminal, osInfo, osLogos, VERSION);
+  commands = new CommandProcessor(terminal, osLogos, VERSION);
 
   window.terminalWindow = new TerminalWindow({
     fit: () => {

@@ -1,3 +1,5 @@
+"use strict";
+
 class TerminalWindow {
   constructor({ fit } = {}) {
     this.wrap = document.querySelector(".float-wrap");

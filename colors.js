@@ -1,3 +1,5 @@
+"use strict";
+
 function buildColors() {
   const rgbParts = (hex) =>
     hex
