@@ -13,5 +13,6 @@ function buildColors() {
     brown: colorize("#ce7e00"),
     orange: colorize("#ffa500"),
     purple: colorize("#c90076"),
+    white: colorize("#ffffff"),
   };
 }

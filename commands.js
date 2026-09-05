@@ -49,7 +49,7 @@ class CommandProcessor {
     }
   }
 
-  printSystemInfo() {
+  printSystemInfo(os) {
     const t = this.terminal;
     const { green, brown } = t.colors;
 
@@ -77,10 +77,7 @@ class CommandProcessor {
       brown("Bitness: ") + `${this.osInfo.modernHints.bitness}`,
       //`FullVersionList: ${this.osInfo.modernHints.fullVersionList}`,
     ];
-    output = this.osLogos.addOSLogoToOSInfo(
-      this.osInfo.modernHints.osName,
-      output,
-    );
+    output = this.osLogos.addOSLogoToOSInfo(os, output);
     t.printLines(output);
   }
   // ---------- Commands ----------.
@@ -304,11 +301,19 @@ class CommandProcessor {
         t.setIsLastError(false);
         t.printLines(green(this.version));
       },
-      fastfetch: () => {
-        this.printSystemInfo();
+      fastfetch: (args) => {
+        let os = args[0];
+        if (!os) {
+          os = this.osInfo.modernHints.osName;
+        }
+        this.printSystemInfo(os);
       },
-      neofetch: () => {
-        this.printSystemInfo();
+      neofetch: (args) => {
+        let os = args[0];
+        if (!os) {
+          os = this.osInfo.modernHints.osName;
+        }
+        this.printSystemInfo(os);
       },
     };
   }

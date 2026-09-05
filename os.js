@@ -70,8 +70,6 @@ async function getParsedBrowserAndOSData() {
   return data;
 }
 
-const emptyLine = "                                  ";
-
 function addPadding(line) {
   const width = emptyLine.length;
   if (line.length < width) {
@@ -79,6 +77,15 @@ function addPadding(line) {
     line += dynamicSpaces;
   }
   return line;
+}
+
+function padNewlines(art, linecount, emptyLine) {
+  const originalArtLength = art.length;
+  let artWithMoreNewlines = art;
+  for (let i = 0; i < linecount - originalArtLength; i++) {
+    artWithMoreNewlines.push(emptyLine);
+  }
+  return artWithMoreNewlines;
 }
 
 class OSLogos {
@@ -106,56 +113,172 @@ class OSLogos {
       blue("    kMMMMMMMMMMMMMMMMMMMMMMd      "),
       blue("     ;KMMMMMMMWXXWMMMMMMMk.       "),
       blue('       "cooc*"    "*coo\'"         '),
-      blue("                                  "),
+      "                                  ",
+    ];
+  }
+
+  _windows() {
+    return [
+      ",.=:!!t3Z3z.,",
+      ":tt:::tt333EE3",
+      "Et:::ztt33EEEL @Ee.,      ..,",
+      ";tt:::tt333EE7 ;EEEEEEttttt33#",
+      ":Et:::zt333EEQ. $EEEEEttttt33QL",
+      "it::::tt333EEF @EEEEEEttttt33F",
+      ';3=*^```"*4EEV :EEEEEEttttt33@.',
+      ",.=::::!t=., ` @EEEEEEtttz33QF",
+      ';::::::::zt33)   "4EEEtttji3P*',
+      ":t::::::::tt33.:Z3z..  `` ,..g.",
+      "i::::::::zt33F AEEEtttt::::ztF",
+      ";:::::::::t33V ;EEEttttt::::t3",
+      "E::::::::zt33L @EEEtttt::::z3F",
+      '{3=*^```"*4E3) ;EEEtttt:::::tZ`',
+      "` :EEEEtttt::::z7",
+      "VEzjt:;;z>*`",
+    ];
+  }
+
+  _android() {
+    return [
+      "-o          o-",
+      "+hydNNNNdyh+",
+      "+mMMMMMMMMMMMMm+",
+      "`dMMm:NMMMMMMN:mMMd`",
+      "hMMMMMMMMMMMMMMMMMMh",
+      "..  yyyyyyyyyyyyyyyyyyyy  ..",
+      ".mMMm`MMMMMMMMMMMMMMMMMMMM`mMMm.",
+      ":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:",
+      ":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:",
+      ":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:",
+      ":MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM:",
+      "-MMMM-MMMMMMMMMMMMMMMMMMMM-MMMM-",
+      "+yy+ MMMMMMMMMMMMMMMMMMMM +yy+",
+      "mMMMMMMMMMMMMMMMMMMm",
+      "`/++MMMMh++hMMMM++/`",
+      "MMMMo  oMMMM",
+      "MMMMo  oMMMM",
+      "oNMm-  -mMNs",
+    ];
+  }
+
+  _linux() {
+    const { orange, dim } = this.colors;
+    return [
+      dim("        #####          "),
+      dim("       #######         "),
+      dim("       ##") + "O" + dim("#") + "O" + dim("##         "),
+      "       " + dim("#") + orange("#####") + dim("#") + "         ",
+      "     " + dim("##") + "##" + orange("###") + "###" + dim("#") + "       ",
+      "    " + dim("#") + "##########" + dim("##") + "      ",
+      "   " + dim("#") + "############" + dim("##") + "     ",
+      "   " + dim("#") + "############" + dim("###") + "    ",
+      "  " +
+        orange("##") +
+        dim("#") +
+        "###########" +
+        dim("##") +
+        orange("#") +
+        "    ",
+      orange("######") +
+        dim("#") +
+        "#######" +
+        dim("#") +
+        orange("#####") +
+        "   ",
+      orange("#######") +
+        dim("#") +
+        "#####" +
+        dim("#") +
+        orange("######") +
+        "   ",
+      "  " + orange("#####") + dim("######") + orange("######") + "    ",
+      "                       ",
+    ];
+  }
+
+  _chromeOS() {
+    return [
+      ".,:loool:,.",
+      ".,coooooooooooooc,.",
+      ".,lllllllllllllllllllll,.",
+      ";ccccccccccccccccccccccccc;",
+      "'ccccccccccccccccccccccccccccc.",
+      ",ooc::::::::okO0000OOkkkkkkkkkkk:",
+      ".ooool;;;;:xK0kxxxxxk0XK0000000000.",
+      ":oooool;,;OKdddddddddddKX000000000d",
+      "lllllool;lNdllllllllllldNK000000000",
+      "llllllllloMdcccccccccccoWK000000000",
+      ";cllllllllXXc:::::::::c0X000000000d",
+      ".ccccllllllONkc;,,,;cxKK0000000000.",
+      ".cccccclllllxOOOOOOkxO0000000000;",
+      ".:cccccccclllllllloO0000000OOO,",
+      ",:ccccccccclllcd0000OOOOOOl.",
+      "'::cccccccccdOOOOOOOkx:.",
+      "..,::ccccxOOOkkko;.",
+      "..,:dOkxl:.",
     ];
   }
 
   _unknown() {
     const { blue } = this.colors;
     return [
-      blue(addPadding("            .◢██████◣.   ")),
-      blue(addPadding("          .◢██▀▀░░▀▀██◣. ")),
-      blue(addPadding("         .███░  .▄▄. ░██.")),
-      blue(addPadding("         ███░  ▐████. ░██")),
-      blue(addPadding("         ▀██.  ░▀▀██▌ ◢██")),
-      blue(addPadding("          ▀██◣.   ▄█▀◢██▀")),
-      blue(addPadding("           ▀█████  ◢██▀  ")),
-      blue(addPadding("            ░▀▀▀  ◢██▀   ")),
-      blue(addPadding("                 ◢██▀    ")),
-      blue(addPadding("                ◢██▀     ")),
-      blue(addPadding("               ▐██▌      ")),
-      blue(addPadding("               ▐██▌      ")),
-      blue(addPadding("               ░▀▀░      ")),
-      blue(addPadding("                         ")),
-      blue(addPadding("               .▄▄.      ")),
-      blue(addPadding("              ▐████▌     ")),
-      blue(addPadding("              ░▀██▀░     ")),
-      blue(addPadding("                         ")),
+      blue("           .◢██████◣.           "),
+      blue("         .◢██▀▀░░▀▀██◣.         "),
+      blue("        .███░  .▄▄. ░██.        "),
+      blue("        ███░  ▐████. ░██        "),
+      blue("        ▀██.  ░▀▀██▌ ◢██        "),
+      blue("         ▀██◣.   ▄█▀◢██▀        "),
+      blue("          ▀█████  ◢██▀          "),
+      blue("           ░▀▀▀  ◢██▀           "),
+      blue("                ◢██▀            "),
+      blue("               ◢██▀             "),
+      blue("              ▐██▌              "),
+      blue("              ▐██▌              "),
+      blue("              ░▀▀░              "),
+      blue("                                "),
+      blue("              .▄▄.              "),
+      blue("             ▐████▌             "),
+      blue("             ░▀██▀░             "),
+      "                                ",
     ];
   }
 
   _getOSLogo(os, linecount) {
-    // console.log(linecount);
-    // console.log(macOSArt.length);
+    os = os.toLowerCase();
 
-    function padNewlines(art, linecount) {
-      let artWithMoreNewlines = art;
-      for (let i = 0; i < linecount - art.length; i++) {
-        artWithMoreNewlines.push(emptyLine);
-      }
-      return artWithMoreNewlines;
-    }
     let art;
-    if (os === "macOS") {
-      art = this._macOS();
-    } else {
-      art = this._unknown();
+    switch (os) {
+      case "ipados":
+      case "ios":
+      case "macos":
+        art = this._macOS();
+        break;
+      case "linux":
+        art = this._linux();
+        break;
+      case "windows":
+        art = this._windows();
+        break;
+      case "android":
+        art = this._android();
+        break;
+      case "chromium":
+      case "chrome":
+      case "chromium os":
+      case "chrome os":
+        art = this._chromeOS();
+        break;
+      default:
+        art = this._unknown();
     }
+
+    const emptyLineLength = art.at(-1).length; // every art last is an empty line
+    const emptyLine = " ".repeat(emptyLineLength);
+
     if (linecount > art.length) {
-      return padNewlines(macOSArt, linecount);
-    } else {
-      return art;
+      art = padNewlines(art, linecount, emptyLine);
     }
+    return art;
   }
 
   addOSLogoToOSInfo(os, info) {
