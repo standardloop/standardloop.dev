@@ -10,6 +10,8 @@
 
 [xterm.js](https://github.com/xtermjs/xterm.js/) client side only website for messing around.
 
+![alt text](https://raw.githubusercontent.com/standardloop/standardloop.dev/refs/heads/main/docs/screenshot.png)
+
 ## Run
 
 ```sh
