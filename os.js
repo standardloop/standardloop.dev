@@ -208,25 +208,61 @@ class OSLogos {
   }
 
   _chromeOS() {
+    const { green, red, blue, brown } = this.colors;
     return [
-      ".,:loool:,.",
-      ".,coooooooooooooc,.",
-      ".,lllllllllllllllllllll,.",
-      ";ccccccccccccccccccccccccc;",
-      "'ccccccccccccccccccccccccccccc.",
-      ",ooc::::::::okO0000OOkkkkkkkkkkk:",
-      ".ooool;;;;:xK0kxxxxxk0XK0000000000.",
-      ":oooool;,;OKdddddddddddKX000000000d",
-      "lllllool;lNdllllllllllldNK000000000",
-      "llllllllloMdcccccccccccoWK000000000",
-      ";cllllllllXXc:::::::::c0X000000000d",
-      ".ccccllllllONkc;,,,;cxKK0000000000.",
-      ".cccccclllllxOOOOOOkxO0000000000;",
-      ".:cccccccclllllllloO0000000OOO,",
-      ",:ccccccccclllcd0000OOOOOOl.",
-      "'::cccccccccdOOOOOOOkx:.",
-      "..,::ccccxOOOkkko;.",
-      "..,:dOkxl:.",
+      red("            .,:loool:,.               "),
+      red("        .,coooooooooooooc,.           "),
+      red("     .,lllllllllllllllllllll,.        "),
+      red("    ;ccccccccccccccccccccccccc;       "),
+      green("  '") + red("ccccccccccccccccccccccccccccc.     "),
+      green(" ,oo") +
+        red("c::::::::okO") +
+        "000" +
+        brown("0OOkkkkkkkkkkk:    "),
+      green(".ooool") +
+        red(";;;;:x") +
+        "K0k" +
+        blue("xxxxxk") +
+        "0X" +
+        brown("K0000000000.   "),
+      green(":oooool") +
+        red(";,;O") +
+        "K" +
+        blue("ddddddddddd") +
+        "KX" +
+        brown("000000000d   "),
+      green("lllllool") +
+        red(";l") +
+        "N" +
+        blue("dllllllllllld") +
+        "N" +
+        brown("K000000000   "),
+      green("lllllllll") +
+        red("o") +
+        "M" +
+        blue("dccccccccccco") +
+        "W" +
+        brown("K000000000   "),
+      green(";cllllllllX") +
+        "X" +
+        blue("c:::::::::c") +
+        "0X" +
+        brown("000000000d   "),
+      green(".ccccllllllO") +
+        "Nk" +
+        blue("c;,,,;cx") +
+        "KK" +
+        brown("0000000000.   "),
+      green(" .cccccclllllxOO") +
+        "OOO" +
+        green("Okx") +
+        brown("O0000000000;    "),
+      green("  .:ccccccccllllllllo") + brown("O0000000OOO,     "),
+      green("    ,:ccccccccclllcd") + brown("0000OOOOOOl.      "),
+      green("      '::ccccccccc") + brown("dOOOOOOOkx:.        "),
+      green("        ..,::cccc") + brown("xOOOkkko;.           "),
+      green("            ..,:") + brown("dOkxl:.               "),
+      "                                      ",
     ];
   }
 
@@ -273,7 +309,7 @@ class OSLogos {
       case "chrome":
       case "chromium os":
       case "chrome os":
-        return this.colors.blue;
+        return this.colors.green;
       default:
         return this.colors.blue;
     }
