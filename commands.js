@@ -112,7 +112,6 @@ class CommandProcessor {
           setupCommand("whoami", "prints my information"),
           setupCommand("banner", "show my banner"),
           setupCommand("fastfetch", "show system information"),
-          setupCommand("neofetch", "aliased to fastfetch"),
           setupCommand("js", "enter javascript mode"),
           setupCommand("exit", "closes the terminal window"),
           setupCommand("shutdown", "power off"),
@@ -304,13 +303,6 @@ class CommandProcessor {
         t.printLines(green(this.version));
       },
       fastfetch: (args) => {
-        let os = args[0];
-        if (!os) {
-          os = this.osInfo.modernHints.osName;
-        }
-        this.printSystemInfo(os);
-      },
-      neofetch: (args) => {
         let os = args[0];
         if (!os) {
           os = this.osInfo.modernHints.osName;
