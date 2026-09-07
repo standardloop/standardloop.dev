@@ -350,54 +350,38 @@ class OSLogos {
     const shape = "██";
     const {
       whitedim,
-      white,
       black,
-      dim,
-      red,
-      green,
+      reddim,
       greendim,
       brown,
-      orange,
-      purple,
-      blue,
+      pinkdim,
+      cyandim,
       bluedim,
     } = this.colors;
     return [
       black(shape) +
-        red(shape) +
+        reddim(shape) +
         greendim(shape) +
         brown(shape) +
         bluedim(shape) +
-        purple(shape) +
-        bluedim(shape) +
+        pinkdim(shape) +
+        cyandim(shape) +
         whitedim(shape),
     ];
   }
 
   #colorShowcaseTwo() {
     const shape = "██";
-    const {
-      whitedim,
-      white,
-      black,
-      dim,
-      red,
-      green,
-      greendim,
-      brown,
-      orange,
-      purple,
-      blue,
-      bluedim,
-    } = this.colors;
+    const { white, blackdim, red, green, orange, pink, blue, cyan } =
+      this.colors;
     return [
-      dim(shape) +
+      blackdim(shape) +
         red(shape) +
         green(shape) +
         orange(shape) +
         blue(shape) +
-        purple(shape) +
-        blue(shape) +
+        pink(shape) +
+        cyan(shape) +
         white(shape),
     ];
   }
