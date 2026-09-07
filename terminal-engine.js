@@ -184,8 +184,6 @@ class TerminalEngine {
 
       if (data === "\r") {
         if (this.inputBuffer.trim()) {
-          this.history[this.historyMode].list.push(this.inputBuffer);
-          this.history[this.historyMode].index =  this.history[this.historyMode].list.length;
           if (this.inJSMode) {
             if (this.inputBuffer.split(" ")[0] === ".exit") {
               this.resetHistory();
@@ -209,6 +207,8 @@ class TerminalEngine {
           } else {
             this.onCommand(this.inputBuffer);
           }
+          this.history[this.historyMode].list.push(this.inputBuffer);
+          this.history[this.historyMode].index =  this.history[this.historyMode].list.length;
         } else {
           this.setIsLastError(false);
         }
