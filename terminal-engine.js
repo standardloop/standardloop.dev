@@ -208,7 +208,8 @@ class TerminalEngine {
             this.onCommand(this.inputBuffer);
           }
           this.history[this.historyMode].list.push(this.inputBuffer);
-          this.history[this.historyMode].index =  this.history[this.historyMode].list.length;
+          this.history[this.historyMode].index =
+            this.history[this.historyMode].list.length;
         } else {
           this.setIsLastError(false);
         }
@@ -240,16 +241,28 @@ class TerminalEngine {
         if (this.history[this.historyMode].index > 0) {
           // this.historyIndex--;
           this.history[this.historyMode].index--;
-          this._replaceLine(this.history[this.historyMode].list[this.history[this.historyMode].index]);
+          this._replaceLine(
+            this.history[this.historyMode].list[
+              this.history[this.historyMode].index
+            ],
+          );
         }
       } else if (data === "\x1b[B") {
         // Down arrow — next history
-        if (this.history[this.historyMode].index < this.history[this.historyMode].list.length - 1) {
+        if (
+          this.history[this.historyMode].index <
+          this.history[this.historyMode].list.length - 1
+        ) {
           // this.historyIndex++;
           this.history[this.historyMode].index++;
-          this._replaceLine(this.history[this.historyMode].list[this.history[this.historyMode].index]);
+          this._replaceLine(
+            this.history[this.historyMode].list[
+              this.history[this.historyMode].index
+            ],
+          );
         } else {
-          this.history[this.historyMode].index = this.history[this.historyMode].list.length;
+          this.history[this.historyMode].index =
+            this.history[this.historyMode].list.length;
           this._replaceLine("");
         }
       } else if (data === "\x1b[C") {

@@ -279,7 +279,7 @@ class CommandProcessor {
       history: () => {
         t.setIsLastError(false);
         t.printLines(t.history["normal"].list);
-      }
+      },
     };
   }
 }

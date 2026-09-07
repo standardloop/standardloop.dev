@@ -4,6 +4,6 @@
 - some common commands
   - fastfetch
   - history (WIP)
-  -  
+  -
 - unified colors (WIP)
 - text editor?

@@ -345,6 +345,63 @@ class OSLogos {
     };
   }
 
+  // WIP, bottom part of fastfetch
+  #colorShowcaseOne() {
+    const shape = "██";
+    const {
+      whitedim,
+      white,
+      black,
+      dim,
+      red,
+      green,
+      greendim,
+      brown,
+      orange,
+      purple,
+      blue,
+      bluedim,
+    } = this.colors;
+    return [
+      black(shape) +
+        red(shape) +
+        greendim(shape) +
+        brown(shape) +
+        bluedim(shape) +
+        purple(shape) +
+        bluedim(shape) +
+        whitedim(shape),
+    ];
+  }
+
+  #colorShowcaseTwo() {
+    const shape = "██";
+    const {
+      whitedim,
+      white,
+      black,
+      dim,
+      red,
+      green,
+      greendim,
+      brown,
+      orange,
+      purple,
+      blue,
+      bluedim,
+    } = this.colors;
+    return [
+      dim(shape) +
+        red(shape) +
+        green(shape) +
+        orange(shape) +
+        blue(shape) +
+        purple(shape) +
+        blue(shape) +
+        white(shape),
+    ];
+  }
+
   #findArt(os) {
     const normalizedKey = os.trim().toLowerCase();
     const canonicalKey = this.#artAliasMap[normalizedKey];
@@ -386,9 +443,11 @@ class OSLogos {
       //`BrandData: ${this.#osInfo.modernHints.brandData}`,
       colorFunction("Model: ") + `${this.#osInfo.modernHints.deviceModel}`,
       colorFunction("Bitness: ") + `${this.#osInfo.modernHints.bitness}`,
+      "",
+      this.#colorShowcaseOne(),
+      this.#colorShowcaseTwo(),
       //`FullVersionList: ${this.#osInfo.modernHints.fullVersionList}`,
     ];
-
     const emptyLineLength = osArt.at(-1).length; // every art last line is an empty line
     const emptyLine = " ".repeat(emptyLineLength);
 
