@@ -21,8 +21,17 @@ class TerminalEngine {
     this.onCommand = typeof onCommand === "function" ? onCommand : () => {};
 
     this.resetInputBuffer();
-    this.history = [];
-    this.historyIndex = -1;
+    this.history = {
+      normal: {
+        list: [],
+        index: -1,
+      },
+      js: {
+        list: [],
+        index: -1,
+      },
+    };
+    this.historyMode = "normal"; // normal or js, maybe swith to enum
 
     // Set by clearScreen() so the next prompt is drawn flush at the top,
     // with no leading blank line above it.
@@ -159,6 +168,15 @@ class TerminalEngine {
     this.inputBuffer = "";
   }
 
+  setHistoryMode(mode) {
+    this.historyMode = mode;
+  }
+
+  resetHistory() {
+    this.history[this.historyMode].list = [];
+    this.history[this.historyMode].index = -1;
+  }
+
   // ---------- Input handling ----------
   _bindInput() {
     this.term.onData((data) => {
@@ -166,11 +184,12 @@ class TerminalEngine {
 
       if (data === "\r") {
         if (this.inputBuffer.trim()) {
-          this.history.push(this.inputBuffer);
-          this.historyIndex = this.history.length;
-          // TODO handle js history too
+          this.history[this.historyMode].list.push(this.inputBuffer);
+          this.history[this.historyMode].index =  this.history[this.historyMode].list.length;
           if (this.inJSMode) {
             if (this.inputBuffer.split(" ")[0] === ".exit") {
+              this.resetHistory();
+              this.setHistoryMode("normal");
               this.setIsLastError(false);
               this.setInJSMode(false);
               this.setPromptSymbol("$");
@@ -218,17 +237,19 @@ class TerminalEngine {
         }
       } else if (data === "\x1b[A") {
         // Up arrow — previous history
-        if (this.historyIndex > 0) {
-          this.historyIndex--;
-          this._replaceLine(this.history[this.historyIndex]);
+        if (this.history[this.historyMode].index > 0) {
+          // this.historyIndex--;
+          this.history[this.historyMode].index--;
+          this._replaceLine(this.history[this.historyMode].list[this.history[this.historyMode].index]);
         }
       } else if (data === "\x1b[B") {
         // Down arrow — next history
-        if (this.historyIndex < this.history.length - 1) {
-          this.historyIndex++;
-          this._replaceLine(this.history[this.historyIndex]);
+        if (this.history[this.historyMode].index < this.history[this.historyMode].list.length - 1) {
+          // this.historyIndex++;
+          this.history[this.historyMode].index++;
+          this._replaceLine(this.history[this.historyMode].list[this.history[this.historyMode].index]);
         } else {
-          this.historyIndex = this.history.length;
+          this.history[this.historyMode].index = this.history[this.historyMode].list.length;
           this._replaceLine("");
         }
       } else if (data === "\x1b[C") {
@@ -306,6 +327,9 @@ class TerminalEngine {
   }
 
   setInJSMode(value) {
+    if (value) {
+      this.historyMode = "js";
+    }
     this.inJSMode = value;
   }
 }
