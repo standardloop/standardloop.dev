@@ -80,6 +80,7 @@ class CommandProcessor {
           setupCommand("banner", "show my banner"),
           setupCommand("fastfetch", "show system information"),
           setupCommand("js", "enter javascript mode"),
+          setupCommand("history", "list history"),
           setupCommand("exit", "closes the terminal window"),
           setupCommand("shutdown", "power off"),
           "",
@@ -275,6 +276,10 @@ class CommandProcessor {
         t.setIsLastError(false);
         t.printLines(systemInfo);
       },
+      history: () => {
+        t.setIsLastError(false);
+        t.printLines(t.history["normal"].list);
+      }
     };
   }
 }
