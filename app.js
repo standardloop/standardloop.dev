@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const colors = buildColors();
   const osInfo = await getParsedBrowserAndOSData();
 
-  const osLogos = new OSLogos(colors, osInfo);
+  const osLogos = new OSLogos(colors, osInfo, VERSION);
 
   const terminal = new TerminalEngine(
     {

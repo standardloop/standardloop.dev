@@ -83,11 +83,13 @@ class OSLogos {
   #artDatabase;
   #artAliasMap;
   #osInfo;
-  constructor(colors, osInfo) {
+  #version;
+  constructor(colors, osInfo, version) {
     this.colors = colors;
     this.#buildArt();
     this.#buildArtAliases();
     this.#osInfo = osInfo;
+    this.#version = version;
   }
 
   // TODO, do we want spaces in the keys?
@@ -361,12 +363,14 @@ class OSLogos {
       os = this.#osInfo.modernHints.osName;
     }
     const { art: osArt, color: colorFunction } = this.getOSArtAndColor(os);
+
+    // TODO, do we want to add || "" for string interprelation on unknown values
     let systemInfo = [
       green(`standardloop`) + `.` + green(`dev`),
       `----------------`,
       colorFunction("OS:") +
         ` ${this.#osInfo.modernHints.osName} ${this.#osInfo.modernHints.osVersion} ${this.#osInfo.modernHints.architecture}`,
-      colorFunction("Shell: ") + `standardloopshell ${this.version}`,
+      colorFunction("Shell: ") + `standardloopshell ${this.#version}`,
       colorFunction("Theme: ") + `Starfield`,
       colorFunction("Terminal: ") + `standardloop.dev`,
       colorFunction("Terminal Font: ") + `IBM Plex Mono`,
