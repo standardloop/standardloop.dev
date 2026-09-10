@@ -1,6 +1,6 @@
 # standardloop.dev
 
-[![GitHub Release](https://img.shields.io/github/v/release/standardloop/standardloop.dev?sort=semver)](https://github.com/standardloop/standardloop.dev/releases) ![Github Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)
+[![GitHub Release](https://img.shields.io/github/v/release/standardloop/standardloop.dev?sort=semver)](https://github.com/standardloop/standardloop.dev/releases) ![Github Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white) [![Formatted with Biome](https://img.shields.io/badge/Formatted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev/)
 ---
 
 - [https://github.com/standardloop/standardloop.dev](https://github.com/standardloop/standardloop.dev)

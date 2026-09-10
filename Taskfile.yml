@@ -21,6 +21,6 @@ tasks:
 
   fmt:
     cmds:
-      - npx prettier --write .
+      - biome format --write .
     desc: |
-      Format the files with prettier.
+      Format the files with Biome.
